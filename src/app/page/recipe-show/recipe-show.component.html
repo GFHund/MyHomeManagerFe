@@ -1,0 +1,28 @@
+<layout-frame returnPath="/recipe">
+    <ng-template [ngIf]="recipe">
+        <h1>{{recipe.title}}</h1>
+        <h2>Zutaten</h2>
+        <div class="incredient-container">
+            <ul class="incredient-list" >
+                <li class="incredient-row" *ngFor="let incredient of recipe.incredient">
+                    {{incredient.amount}} {{incredient.unit}} {{incredient.productTitle}}
+                </li>
+            </ul>
+        </div>
+        <h2>Zubereitung</h2>
+        <div class="steps-container">
+            <div class="steps-list">
+                <div class="steps-row" *ngFor="let step of recipe.steps">
+                    <span class="steps-number">
+                        {{step.stepnumber}}
+                    </span>
+                    <span class="steps-description">
+                        {{step.description}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    
+
+</layout-frame>

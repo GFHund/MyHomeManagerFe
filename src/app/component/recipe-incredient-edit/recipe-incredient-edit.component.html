@@ -1,0 +1,6 @@
+<form (ngSubmit)="onSave(form.value)" #form="ngForm">
+    <app-form-input label="Menge" name="amount" [(ngModel)]="incredient.amount"></app-form-input>
+    <app-form-input label="Einheit" name="unit" [(ngModel)]="incredient.unit"></app-form-input>
+    <app-form-entity-select label="Produkt" [entityService]="productService" name="product" [(ngModel)]="incredient.productId"></app-form-entity-select>
+    <app-form-submit label="Speichern"></app-form-submit>
+</form>

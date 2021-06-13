@@ -1,0 +1,23 @@
+<layout-frame>
+	<div class="actions-container">
+		<link-button path="/shopping-list/new">Neue Shopping List</link-button>
+	</div>
+	<div class="list-container">
+		<div class="list-row" *ngFor="let shoppingList of shoppingListList">
+			
+			<div class="title">
+				<a [routerLink]="['/','shopping-list',shoppingList.id,'view']">{{shoppingList.title}}</a>
+			</div>
+			<div class="row-actions">
+				<link-button [path]="['/','shopping-list',shoppingList.id,'edit']">
+					<app-icon icon="edit"></app-icon>
+				</link-button>
+				<link-button (click)="onDeleteShoppingList(shoppingList.id)">
+					<app-icon icon="cross"></app-icon>
+				</link-button>
+			</div>
+			
+			
+		</div>
+	</div>
+</layout-frame>

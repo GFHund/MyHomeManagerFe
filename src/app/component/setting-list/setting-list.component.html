@@ -1,0 +1,19 @@
+
+<form (ngSubmit)="onSubmit(form)" #form="ngForm">
+<div *ngFor="let setting of this.settings" class="form-group">
+    
+    <div *ngIf="setting.type === 'ints'">
+        <app-form-input type="number" [label]="setting.label" [(ngModel)]="setting.value" [name]="setting.valueId"></app-form-input>
+    </div>
+    <div *ngIf="setting.type === 'floats'">
+        <app-form-input type="text" [label]="setting.label" [(ngModel)]="setting.value" [name]="setting.valueId"></app-form-input>
+    </div>
+    <div *ngIf="setting.type === 'booleans'">
+        <app-form-checkbox [label]="setting.label"></app-form-checkbox>
+    </div>
+    <div *ngIf="setting.type == 'strings'">
+        <app-form-input type="text" [label]="setting.label" [(ngModel)]="setting.value" [name]="setting.valueId"></app-form-input>
+    </div>
+</div>
+<app-form-submit label="Speichern"></app-form-submit>
+</form>

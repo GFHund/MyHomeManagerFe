@@ -1,0 +1,33 @@
+<header>
+	<a *ngIf="!returnPath" (click)="openMenuButton()" >
+		<app-icon icon="bar"></app-icon>
+	</a>
+	<a *ngIf="returnPath">
+		<app-icon icon="arrow-left" [routerLink]="returnPath" ></app-icon>
+	</a>
+</header>
+<div class="content-container">
+	<nav #navigation [ngClass]="{'nav-open':navClass}">
+		<ul>
+			<li routerLink='/login'>
+				Login
+			</li>
+			<li routerLink='/product/list'>Produkte</li>
+			<li routerLink='/shopping-list'>
+				Shopping List
+			</li>
+			<li routerLink='/recipe'>Rezepte</li>
+			<li routerLink='/todo/list'>ToDo-List</li>
+			<li routerLink='/wiki/list'>Wiki</li>
+			<li routerLink='/magazine'>Magazine</li>
+			<li routerLink='/user-managment/list'>Benutzerverwaltung</li>
+			<li routerLink='/settings'>Einstellungen</li>
+		</ul>
+	</nav>
+	<main>
+		<ng-content></ng-content>
+	</main>
+</div>
+
+<footer>
+</footer>

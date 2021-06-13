@@ -1,0 +1,7 @@
+<div class="accordeon-title" (click)="onClickOpenAccordeon()">
+    <span>{{title}}</span>
+    <app-icon icon="chevron-down"></app-icon> 
+</div>
+<div class="accordeon-content" [class]="accordeonClass" #content [style.max-height]="accordeonPercentOpen">
+    <ng-content></ng-content>
+</div>

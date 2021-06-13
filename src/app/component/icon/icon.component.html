@@ -1,0 +1,49 @@
+<i>
+	<ng-template [ngIf]="icon === 'bar'">
+		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="36" viewbox="0 0 30 36">
+			<line x1="0" y1="10" x2="30" y2="10" stroke="#000" />
+			<line x1="0" y1="18" x2="30" y2="18" stroke="#000" />
+			<line x1="0" y1="26" x2="30" y2="26" stroke="#000" />
+		</svg>
+	</ng-template>
+	<ng-template [ngIf]="icon === 'cross'">
+		<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewbox="0 0 15 15">
+			<g>
+				<line x1="0" y1="0" x2="15" y2="15" stroke="#000" stroke-width="3" />
+				<line x1="15" y1="0" x2="0" y2="15" stroke="#000" stroke-width="3" />
+			</g>
+		</svg>
+	</ng-template>
+	<ng-template [ngIf]="icon === 'edit'">
+		<svg width="5" height="4" version="1.1" viewBox="0 0 5 4" xmlns="http://www.w3.org/2000/svg" transform="scale(4)">
+			<g id="layer1" transform="translate(-0.97738679,-1.9596096) ">
+	    <path
+	       style="stroke-width:0.23;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+	       d="M 4.2849767,2.1818496 1.5193908,4.4069702 1.1312325,5.7536725 2.5533489,5.7213047 5.2612788,3.4288098"
+	       id="path10" />
+	    <path
+	       style="stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+	       d="m 1.5193908,4.4069701 c 0,0 0.4611737,-0.2161815 0.9027393,0.3370639 0.4415655,0.5532453 0.1312188,0.9772707 0.1312188,0.9772707"
+	       id="path854" />
+	    <path
+	       style="stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+	       d="m 4.2849767,2.1818496 c 0,0 0.5446954,-0.3164076 0.986261,0.2368378 0.4415655,0.5532453 -0.00996,1.0101224 -0.00996,1.0101224"
+	       id="path854-8" />
+	  </g>
+		</svg>
+	</ng-template>
+	<ng-template [ngIf]="icon == 'arrow-left'">
+		<svg width="30" height="30" viewbox="0 0 30 30" stroke="#000" stroke-width="2">
+			<line x1="2" x2="25" y1="15" y2="15" />
+			<line x1="2" x2="12" y1="15" y2="5" />
+			<line x1="2" x2="12" y1="15" y2="25" />
+		</svg>
+	</ng-template>
+	<ng-template [ngIf]="icon == 'chevron-down'">
+		<svg width="30" height="30" viewbox="0 0 30 30" stroke="#000" stroke-width="2">
+			<line x1="0" x2="15" y1="15" y2="29" />
+			<line x1="15" x2="30" y1="29" y2="15" />
+			
+		</svg>
+	</ng-template>
+</i>

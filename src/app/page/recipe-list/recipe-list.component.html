@@ -1,0 +1,23 @@
+<layout-frame>
+  <div class="actions-container">
+		<link-button path="/recipe/new">Neue Rezepte</link-button>
+	</div>
+  <div class="list-container">
+		<div class="list-row" *ngFor="let recipe of recipeList">
+			
+			<div class="title">
+				<a [routerLink]="['/recipe',recipe.id,'view']">{{recipe.name}}</a>
+			</div>
+			<div class="row-actions">
+				<link-button [path]="['/recipe',recipe.id,'edit']">
+					<app-icon icon="edit"></app-icon>
+				</link-button>
+				<link-button (click)="onDeleteRecipe(recipe.id)">
+					<app-icon icon="cross"></app-icon>
+				</link-button>
+			</div>
+			
+			
+		</div>
+	</div>
+</layout-frame>

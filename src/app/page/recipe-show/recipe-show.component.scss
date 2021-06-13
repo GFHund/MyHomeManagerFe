@@ -1,0 +1,19 @@
+@import "../../../variables.scss";
+
+.incredient-container{
+    
+    margin-bottom:1rem;
+}
+.incredient-list{
+    padding:0;
+}
+.incredient-row{
+    list-style: none;
+    padding:1rem 1rem;
+    &:not(:last-child){
+        border-bottom:1px solid $gray;
+    }
+}
+.steps-row{
+    padding:1rem 1rem;
+}

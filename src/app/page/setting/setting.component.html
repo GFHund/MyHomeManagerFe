@@ -1,0 +1,6 @@
+<layout-frame>
+    <div *ngFor="let settingGroup of this.settingGroups">
+        <h1>{{settingGroup.title}}</h1>
+        <app-setting-list [settings]="settingGroup.settings"></app-setting-list>
+    </div>
+</layout-frame>

@@ -1,0 +1,14 @@
+label{
+    position:relative;
+    display:block;
+    span{
+		position:absolute;
+		top:0;
+		left:1rem;
+        font-size:1.2rem;
+	}
+    textarea{
+        padding:1.2rem 1rem 0.5rem;
+        width:100%;
+    }
+}

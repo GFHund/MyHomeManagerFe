@@ -1,0 +1,51 @@
+@import "../../../variables.scss";
+
+$headerHeight: 4.0rem;
+
+header{
+	box-shadow: 0 1px 10px  #000 ;
+	width:100%;
+	height:$headerHeight;
+	background-color:$blue-bg;
+	padding:0 5px;
+}
+.content-container{
+	position:relative;
+}
+nav{
+	position:absolute;
+	left:-100%;
+	top:0;
+	background-color:$blue-bg;
+	height:calc(100vh - #{$headerHeight});
+	width:100%;
+	transition:left 0.5s ease; 
+	z-index:1000;
+	
+	ul{
+		list-style:none;
+		padding:0;
+	}
+	li{
+		color:$white;
+		padding:5px 10px;
+		&:not(:last-child){
+			border-bottom:1px solid $white;
+		}
+		&:hover{
+			cursor:pointer;
+		}
+	}
+	a{
+		
+		color: $white;
+		text-decoration:none;
+	}
+}
+
+nav.nav-open{
+	left:0;
+}
+main{
+	padding:1rem 1rem 0 1rem;
+}

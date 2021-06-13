@@ -1,0 +1,12 @@
+<layout-frame>
+	<div class="actions-container">
+		<link-button path="/product/new">Neues Produkt</link-button>
+		<div class="list-container">
+			<div class="list-row" *ngFor="let product of products">
+				<div class="title">
+					<a [routerLink]="['/product',product.id,'edit']">{{product.productName}}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</layout-frame>

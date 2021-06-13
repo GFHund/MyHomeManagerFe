@@ -1,0 +1,18 @@
+<layout-frame returnPath="/recipe">
+  <form (ngSubmit)="onSave(form.value)" #form="ngForm">
+    <app-form-input label="Title" [(ngModel)]="recipe.title" name="title"></app-form-input>
+    <app-form-input label="Persons" [(ngModel)]="recipe.persons" name="persons"></app-form-input>
+    <app-form-input label="Time" [(ngModel)]="recipe.time" name="time"></app-form-input>
+    <app-form-submit label="Speichern"></app-form-submit>
+  </form>
+  <hr />
+  <app-action-button *ngIf="!isNew" (onClickEvent)="addProduct($event)">Zutat hinzufügen</app-action-button>
+  <app-accordeon *ngFor="let incredient of recipe.incredient" [title]="incredient.productTitle">
+  	<app-recipe-incredient-edit [incredient]="incredient" [recipeId]="recipe.id"></app-recipe-incredient-edit>
+  </app-accordeon>
+  <hr />
+  <app-action-button *ngIf="!isNew" (onClickEvent)="addStep($event)">Schritt hinzufügen</app-action-button>
+  <app-accordeon *ngFor="let step of recipe.steps" [title]="''+step.stepnumber">
+    <app-recipe-step-edit [step]="step" [recipeId]="recipe.id"></app-recipe-step-edit>
+  </app-accordeon>
+</layout-frame>

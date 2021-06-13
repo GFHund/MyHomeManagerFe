@@ -1,0 +1,12 @@
+<layout-frame returnPath="/shopping-list">
+
+    <form (ngSubmit)="onSave(form.value)" #form="ngForm">
+        <app-form-input label="Title" [(ngModel)]="obj.title" name="title"></app-form-input>
+        <app-form-submit label="Speichern"></app-form-submit>
+    </form>
+    <app-action-button *ngIf="!isNew" (onClickEvent)="onAddProduct($event)">Produkt Hinzufügen</app-action-button>
+    <app-accordeon *ngFor="let mapping of mappings" [title]="mapping.productTitle">
+        <app-shopping-list-mapping [mapping]="mapping"></app-shopping-list-mapping>        
+    </app-accordeon>
+
+</layout-frame>

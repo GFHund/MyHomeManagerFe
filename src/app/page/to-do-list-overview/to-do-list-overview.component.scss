@@ -1,0 +1,35 @@
+@import "../../../variables.scss";
+
+.actions-container{
+	margin-bottom:1rem;
+}
+  
+.row-actions link-button{
+	max-width:50px;
+	display:inline-block;
+	&:not(:last-child){
+		margin-right:0.5rem;
+	}
+}
+.list-row{
+	display:flex;
+	align-items:center;
+	background-color: $gray;
+	padding:0.5rem;
+	border-radius:3px;
+	margin-bottom:5px;
+}
+.title{
+	flex:1 0 auto;
+	a {
+		color:$black;
+		text-decoration: none;
+	}
+}
+.row-actions{
+	flex:0 0 10.5rem;	
+}
+link-button{
+    display:block;
+    margin-bottom:5px;
+}

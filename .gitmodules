@@ -1,0 +1,3 @@
+[submodule "MyHomeManagerApiSpecification"]
+	path = MyHomeManagerApiSpecification
+	url = git@github.com:GFHund/MyHomeManagerApiSpecification.git

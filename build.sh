@@ -1,0 +1,1 @@
+docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate -i /local/MyHomeManagerApiSpecification/api.json -g typescript-angular -o ./local/src/OpenApi

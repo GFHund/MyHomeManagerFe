@@ -1,0 +1,21 @@
+<layout-frame>
+
+	<app-checkbox-action label="FIDO2 aktivieren"></app-checkbox-action>
+
+	<form novalidate (ngSubmit)="onSubmit(form)" #form="ngForm">
+		<app-form-input type="text" label="Benutzername" name="user" ngModel></app-form-input>
+		<app-form-input type="password" label="Passwort" name="password" ngModel></app-form-input>
+		<!-- 
+		<label>
+			<input type="text">
+			<span>Benutzername:</span>
+		</label>
+		<label>
+			<input type="password">
+			<span>Passwort:</span>
+		</label>
+		-->
+		<input type="submit" value="login" [disabled]="!form.valid">
+	</form>
+</layout-frame>
+

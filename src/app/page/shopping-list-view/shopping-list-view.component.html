@@ -1,0 +1,10 @@
+<layout-frame returnPath="/shopping-list">
+	<h1>{{obj.title}}</h1>
+	<table>
+		<tr *ngFor="let mapping of mappings">
+			<td>{{mapping.amount}} {{mapping.unit}}</td>
+			<td>{{mapping.productTitle}}</td>
+			<td></td>
+		</tr>
+	</table>
+</layout-frame>

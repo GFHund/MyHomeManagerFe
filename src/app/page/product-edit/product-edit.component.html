@@ -1,0 +1,6 @@
+<layout-frame returnPath="/product/list">
+	<form (ngSubmit)="onSave(form)" #form="ngForm">
+		<app-form-input label="Title" [(ngModel)]="product.productName" name="title" required></app-form-input>
+		<app-form-submit label="Speichern"></app-form-submit>
+	</form>
+</layout-frame>

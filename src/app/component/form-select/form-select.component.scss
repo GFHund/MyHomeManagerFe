@@ -1,0 +1,32 @@
+@import "../../../variables.scss";
+label{
+	position:relative;
+	display:block;
+	span{
+		position:absolute;
+		top:50%;
+		left:1rem;
+		transform: translateY(-50%);
+		transition: all 0.2s ease;
+	}
+	input{
+		padding:1.2rem 1rem 0.5rem;
+		width:100%;
+	}
+	input:focus + span,&.not-empty span{
+		font-size:1.2rem;
+		top:0;
+		transform:none;
+	}
+}
+.options{
+	padding:10px 15px;
+	&:hover{
+		background-color:$blue-bg;
+		color: $white;
+	}
+	
+}
+.options-container{
+	border:1px solid $gray;
+}
