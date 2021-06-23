@@ -1,0 +1,7 @@
+<layout-frame returnPath="/wiki/list">
+    <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+        <app-form-input label="Title" [(ngModel)]="wikiObj.title" name="title"></app-form-input>
+        <app-form-markdown-editor [(ngModel)]="wikiObj.text" name="content"></app-form-markdown-editor>
+        <app-form-submit label="Speichern"></app-form-submit>
+    </form>
+</layout-frame>

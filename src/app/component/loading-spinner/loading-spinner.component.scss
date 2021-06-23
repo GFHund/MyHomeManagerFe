@@ -1,0 +1,33 @@
+div{
+    border-radius: 50%;
+    background-image: linear-gradient(#ccc ,transparent 40%,transparent 60%,#ccc );
+    //background-image: radial-gradient(circle #ccc,transparent);
+    width:20px;
+    height:20px;
+    animation:rotation 1s infinite linear;
+    position:relative;
+    
+    &:before{
+        content:'';
+        position:absolute;
+        top:3.0px;
+        left:3.0px;
+        //transform:translate(-50%,-50%);
+        background-color:white;
+        width:14px;
+        height:14px;
+        border-radius: 50%;
+    }
+    
+}
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

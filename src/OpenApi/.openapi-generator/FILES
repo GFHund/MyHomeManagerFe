@@ -3,11 +3,11 @@ README.md
 api.module.ts
 api/api.ts
 api/auth.service.ts
-api/contract.service.ts
 api/incredient.service.ts
 api/magazines.service.ts
 api/product.service.ts
 api/recipe.service.ts
+api/setting.service.ts
 api/shoppingList.service.ts
 api/todo.service.ts
 api/user.service.ts
@@ -17,15 +17,12 @@ encoder.ts
 git_push.sh
 index.ts
 model/authReturn.ts
-model/contractGet.ts
-model/contractWrite.ts
 model/defaultReturn.ts
 model/login.ts
 model/magazinesGet.ts
 model/magazinesItemWrite.ts
 model/models.ts
 model/notFound.ts
-model/productFilter.ts
 model/productGet.ts
 model/productWrite.ts
 model/recipeGet.ts
@@ -35,7 +32,7 @@ model/recipeSimple.ts
 model/recipeStepGet.ts
 model/recipeStepWrite.ts
 model/recipeWrite.ts
-model/search.ts
+model/setting.ts
 model/shoppingListGet.ts
 model/shoppingListMappingGet.ts
 model/shoppingListMappingWrite.ts
@@ -51,5 +48,4 @@ model/userPropertiesWrite.ts
 model/wikiPageGet.ts
 model/wikiPageWrite.ts
 model/wikiSearch.ts
-model/wikiSimple.ts
 variables.ts

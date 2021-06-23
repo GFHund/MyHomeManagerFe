@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { WikiPageNg } from 'src/app/model/WikiPageNg';
+import { WikiNgService } from 'src/app/service/wikiNg/wiki-ng.service';
 
 @Component({
   selector: 'app-wiki-list',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WikiListComponent implements OnInit {
 
-  constructor() { }
+  wikiPages:WikiPageNg[] = [];
+
+  constructor(private wikiService:WikiNgService) { }
 
   ngOnInit(): void {
+    this.wikiService.getWikiPages().subscribe((wikiPages:WikiPageNg[])=> {
+      this.wikiPages = wikiPages;
+    });
   }
+
+  onDelete(id: string){}
 
 }

@@ -506,9 +506,9 @@ export class RecipeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getRecipeItem(recipeId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<any>;
-    public getRecipeItem(recipeId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<any>>;
-    public getRecipeItem(recipeId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<any>>;
+    public getRecipeItem(recipeId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<RecipeGet>;
+    public getRecipeItem(recipeId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<RecipeGet>>;
+    public getRecipeItem(recipeId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<RecipeGet>>;
     public getRecipeItem(recipeId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
         if (recipeId === null || recipeId === undefined) {
             throw new Error('Required parameter recipeId was null or undefined when calling getRecipeItem.');
@@ -534,7 +534,7 @@ export class RecipeService {
             responseType = 'text';
         }
 
-        return this.httpClient.get<any>(`${this.configuration.basePath}/api/v1/recipe/${encodeURIComponent(String(recipeId))}`,
+        return this.httpClient.get<RecipeGet>(`${this.configuration.basePath}/api/v1/recipe/${encodeURIComponent(String(recipeId))}`,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,
@@ -757,9 +757,9 @@ export class RecipeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updateRecipeItem(recipeId: string, recipeWrite: RecipeWrite, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<any>;
-    public updateRecipeItem(recipeId: string, recipeWrite: RecipeWrite, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<any>>;
-    public updateRecipeItem(recipeId: string, recipeWrite: RecipeWrite, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<any>>;
+    public updateRecipeItem(recipeId: string, recipeWrite: RecipeWrite, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<RecipeGet>;
+    public updateRecipeItem(recipeId: string, recipeWrite: RecipeWrite, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<RecipeGet>>;
+    public updateRecipeItem(recipeId: string, recipeWrite: RecipeWrite, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<RecipeGet>>;
     public updateRecipeItem(recipeId: string, recipeWrite: RecipeWrite, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
         if (recipeId === null || recipeId === undefined) {
             throw new Error('Required parameter recipeId was null or undefined when calling updateRecipeItem.');
@@ -797,7 +797,7 @@ export class RecipeService {
             responseType = 'text';
         }
 
-        return this.httpClient.put<any>(`${this.configuration.basePath}/api/v1/recipe/${encodeURIComponent(String(recipeId))}`,
+        return this.httpClient.put<RecipeGet>(`${this.configuration.basePath}/api/v1/recipe/${encodeURIComponent(String(recipeId))}`,
             recipeWrite,
             {
                 responseType: <any>responseType,

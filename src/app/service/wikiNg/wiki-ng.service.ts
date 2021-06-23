@@ -51,4 +51,18 @@ export class WikiNgService {
     };
     return this.wikiService.createWikiPage(write);
   }
+
+  updateWikiPage(updateWikiPage:WikiPageNg){
+    let wikiWrite: WikiPageWrite = {
+      title: updateWikiPage.title,
+      text: updateWikiPage.text
+    }
+    return this.wikiService.updateWikiPage(updateWikiPage.id,wikiWrite).pipe(map((response => {
+      return {
+        id: response.id ?? '',
+        title: response.title ?? '',
+        text: response.text ?? ''
+      } as WikiPageNg;
+    })));
+  }
 }

@@ -3,11 +3,11 @@ import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
 import { AuthService } from './api/auth.service';
-import { ContractService } from './api/contract.service';
 import { IncredientService } from './api/incredient.service';
 import { MagazinesService } from './api/magazines.service';
 import { ProductService } from './api/product.service';
 import { RecipeService } from './api/recipe.service';
+import { SettingService } from './api/setting.service';
 import { ShoppingListService } from './api/shoppingList.service';
 import { TodoService } from './api/todo.service';
 import { UserService } from './api/user.service';

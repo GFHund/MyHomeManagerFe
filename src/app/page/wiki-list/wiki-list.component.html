@@ -1,1 +1,21 @@
-<layout-frame></layout-frame>
+<layout-frame>
+    <div class="actions-container">
+		<link-button path="/wiki/new">Neue Wiki Page</link-button>
+	</div>
+    <div class="list-container">
+        <div class="list-row" *ngFor="let wikiPage of wikiPages">
+            <div class="title">
+                <a [routerLink]="['/','wiki',wikiPage.id,'view']">{{wikiPage.title}}</a>
+            </div>
+            <div class="row-actions">
+                <link-button [path]="['/','wiki',wikiPage.id,'edit']">
+					<app-icon icon="edit"></app-icon>
+				</link-button>
+				<link-button (click)="onDelete(wikiPage.id)">
+					<app-icon icon="cross"></app-icon>
+				</link-button>
+            </div>
+        </div>
+    </div>
+    <app-loading-spinner></app-loading-spinner>
+</layout-frame>

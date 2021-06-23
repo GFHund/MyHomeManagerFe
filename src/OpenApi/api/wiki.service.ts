@@ -239,9 +239,9 @@ export class WikiService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getWikiPages(wikiSearch?: WikiSearch, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<string>>;
-    public getWikiPages(wikiSearch?: WikiSearch, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<string>>>;
-    public getWikiPages(wikiSearch?: WikiSearch, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<string>>>;
+    public getWikiPages(wikiSearch?: WikiSearch, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<WikiPageGet>>;
+    public getWikiPages(wikiSearch?: WikiSearch, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<WikiPageGet>>>;
+    public getWikiPages(wikiSearch?: WikiSearch, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<WikiPageGet>>>;
     public getWikiPages(wikiSearch?: WikiSearch, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -273,7 +273,7 @@ export class WikiService {
             responseType = 'text';
         }
 
-        return this.httpClient.get<Array<string>>(`${this.configuration.basePath}/api/v1/wiki/page`,
+        return this.httpClient.get<Array<WikiPageGet>>(`${this.configuration.basePath}/api/v1/wiki/page`,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,
@@ -287,15 +287,19 @@ export class WikiService {
     /**
      * updates the wiki page
      * @param pageId wiki page id
+     * @param wikiPageWrite 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updateWikiPage(pageId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<WikiPageGet>;
-    public updateWikiPage(pageId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<WikiPageGet>>;
-    public updateWikiPage(pageId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<WikiPageGet>>;
-    public updateWikiPage(pageId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    public updateWikiPage(pageId: string, wikiPageWrite: WikiPageWrite, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<WikiPageGet>;
+    public updateWikiPage(pageId: string, wikiPageWrite: WikiPageWrite, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<WikiPageGet>>;
+    public updateWikiPage(pageId: string, wikiPageWrite: WikiPageWrite, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<WikiPageGet>>;
+    public updateWikiPage(pageId: string, wikiPageWrite: WikiPageWrite, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
         if (pageId === null || pageId === undefined) {
             throw new Error('Required parameter pageId was null or undefined when calling updateWikiPage.');
+        }
+        if (wikiPageWrite === null || wikiPageWrite === undefined) {
+            throw new Error('Required parameter wikiPageWrite was null or undefined when calling updateWikiPage.');
         }
 
         let headers = this.defaultHeaders;
@@ -313,13 +317,22 @@ export class WikiService {
         }
 
 
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
         let responseType: 'text' | 'json' = 'json';
         if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
             responseType = 'text';
         }
 
         return this.httpClient.put<WikiPageGet>(`${this.configuration.basePath}/api/v1/wiki/page/${encodeURIComponent(String(pageId))}`,
-            null,
+            wikiPageWrite,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,

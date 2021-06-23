@@ -16,6 +16,8 @@ import { WikiListComponent } from './page/wiki-list/wiki-list.component';
 import { UserManagmentListComponent } from './page/user-managment-list/user-managment-list.component';
 import { SettingComponent } from './page/setting/setting.component';
 import { MagazineListComponent } from './page/magazine-list/magazine-list.component';
+import { WikiEditComponent } from './page/wiki-edit/wiki-edit.component';
+import { WikiShowComponent } from './page/wiki-show/wiki-show.component';
 
 const routes: Routes = [
 {path: '', component: IndexComponent},
@@ -34,6 +36,9 @@ const routes: Routes = [
 {path: 'todo/list', component: ToDoListOverviewComponent},
 {path: 'todo/:id/view',component: ToDoListViewComponent},
 {path: 'wiki/list',component: WikiListComponent},
+{path: 'wiki/new',component: WikiEditComponent},
+{path: 'wiki/:id/edit',component: WikiEditComponent},
+{path: 'wiki/:id/view',component: WikiShowComponent},
 {path: 'magazine',component: MagazineListComponent},
 {path: 'user-managment/list', component: UserManagmentListComponent},
 {path: 'settings',component: SettingComponent}

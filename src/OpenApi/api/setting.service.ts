@@ -17,9 +17,8 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
-import { MagazinesGet } from '../model/models';
-import { MagazinesItemWrite } from '../model/models';
-import { NotFound } from '../model/models';
+import { DefaultReturn } from '../model/models';
+import { Setting } from '../model/models';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -29,7 +28,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class MagazinesService {
+export class SettingService {
 
     protected basePath = 'http://slime.home:8080';
     public defaultHeaders = new HttpHeaders();
@@ -87,14 +86,14 @@ export class MagazinesService {
     }
 
     /**
-     * Gets a List of all Magazines on the server
+     * get settings
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getMagazineList(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<MagazinesGet>>;
-    public getMagazineList(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<MagazinesGet>>>;
-    public getMagazineList(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<MagazinesGet>>>;
-    public getMagazineList(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    public getSettings(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<Setting>>;
+    public getSettings(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<Setting>>>;
+    public getSettings(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<Setting>>>;
+    public getSettings(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -116,7 +115,7 @@ export class MagazinesService {
             responseType = 'text';
         }
 
-        return this.httpClient.get<Array<MagazinesGet>>(`${this.configuration.basePath}/api/v1/magazines/list`,
+        return this.httpClient.get<Array<Setting>>(`${this.configuration.basePath}/setting`,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,
@@ -128,21 +127,17 @@ export class MagazinesService {
     }
 
     /**
-     * update Magazine Database Row
-     * @param magazineId id of the magazine
-     * @param magazinesItemWrite 
+     * update settings
+     * @param requestBody 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updateMagazineData(magazineId: string, magazinesItemWrite: MagazinesItemWrite, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<MagazinesGet>;
-    public updateMagazineData(magazineId: string, magazinesItemWrite: MagazinesItemWrite, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<MagazinesGet>>;
-    public updateMagazineData(magazineId: string, magazinesItemWrite: MagazinesItemWrite, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<MagazinesGet>>;
-    public updateMagazineData(magazineId: string, magazinesItemWrite: MagazinesItemWrite, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
-        if (magazineId === null || magazineId === undefined) {
-            throw new Error('Required parameter magazineId was null or undefined when calling updateMagazineData.');
-        }
-        if (magazinesItemWrite === null || magazinesItemWrite === undefined) {
-            throw new Error('Required parameter magazinesItemWrite was null or undefined when calling updateMagazineData.');
+    public getSettings_1(requestBody: Array<object>, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<DefaultReturn>;
+    public getSettings_1(requestBody: Array<object>, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<DefaultReturn>>;
+    public getSettings_1(requestBody: Array<object>, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<DefaultReturn>>;
+    public getSettings_1(requestBody: Array<object>, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+        if (requestBody === null || requestBody === undefined) {
+            throw new Error('Required parameter requestBody was null or undefined when calling getSettings_1.');
         }
 
         let headers = this.defaultHeaders;
@@ -174,8 +169,8 @@ export class MagazinesService {
             responseType = 'text';
         }
 
-        return this.httpClient.put<MagazinesGet>(`${this.configuration.basePath}/api/v1/magazines/${encodeURIComponent(String(magazineId))}`,
-            magazinesItemWrite,
+        return this.httpClient.put<DefaultReturn>(`${this.configuration.basePath}/setting`,
+            requestBody,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,

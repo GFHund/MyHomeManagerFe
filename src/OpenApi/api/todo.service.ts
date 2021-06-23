@@ -23,7 +23,7 @@ import { ToDoListGet } from '../model/models';
 import { ToDoListItemGet } from '../model/models';
 import { ToDoListItemWrite } from '../model/models';
 import { ToDoListWrite } from '../model/models';
-import { WikiSearch } from '../model/models';
+import { ToDoSearch } from '../model/models';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -388,14 +388,14 @@ export class TodoService {
 
     /**
      * get a list of todo lists
-     * @param wikiSearch 
+     * @param toDoSearch 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getToDoLists(wikiSearch?: WikiSearch, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<ToDoListGet>>;
-    public getToDoLists(wikiSearch?: WikiSearch, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<ToDoListGet>>>;
-    public getToDoLists(wikiSearch?: WikiSearch, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<ToDoListGet>>>;
-    public getToDoLists(wikiSearch?: WikiSearch, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    public getToDoLists(toDoSearch?: ToDoSearch, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<ToDoListGet>>;
+    public getToDoLists(toDoSearch?: ToDoSearch, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<ToDoListGet>>>;
+    public getToDoLists(toDoSearch?: ToDoSearch, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<ToDoListGet>>>;
+    public getToDoLists(toDoSearch?: ToDoSearch, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
 
         let headers = this.defaultHeaders;
 
