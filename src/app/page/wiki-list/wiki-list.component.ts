@@ -10,12 +10,14 @@ import { WikiNgService } from 'src/app/service/wikiNg/wiki-ng.service';
 export class WikiListComponent implements OnInit {
 
   wikiPages:WikiPageNg[] = [];
+  bLoading = true;
 
   constructor(private wikiService:WikiNgService) { }
 
   ngOnInit(): void {
     this.wikiService.getWikiPages().subscribe((wikiPages:WikiPageNg[])=> {
       this.wikiPages = wikiPages;
+      this.bLoading = false;
     });
   }
 

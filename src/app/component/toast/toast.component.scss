@@ -1,0 +1,11 @@
+:host{
+    position: fixed;
+    bottom:100px;
+    left:50%;
+    transform:translateX(-50%);
+    background-color: rgba(0,0,0,1);
+    border-radius: 10px;
+    padding:10px;
+    z-index:5000;
+    color:white;
+}

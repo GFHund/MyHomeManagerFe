@@ -47,6 +47,7 @@ import { WikiShowComponent } from './page/wiki-show/wiki-show.component';
 import { Mk2htmlPipe } from './pipe/mk2html.pipe';
 import { LoadingSpinnerComponent } from './component/loading-spinner/loading-spinner.component';
 import { ModalComponent } from './component/modal/modal.component';
+import { ToastComponent } from './component/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { ModalComponent } from './component/modal/modal.component';
     Mk2htmlPipe,
     LoadingSpinnerComponent,
     ModalComponent,
+    ToastComponent,
   ],
   imports: [
     BrowserModule,
