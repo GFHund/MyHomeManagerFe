@@ -1,0 +1,27 @@
+<div class="modal-outside">
+    <div class="modal">
+        <div class="modal--title">
+            {{modalConfig.title}}
+        </div>
+        <div class="modal--message">
+            {{modalConfig.message}}
+        </div>
+        <div *ngIf="modalConfig.bShowCancelButton;else elseButton" class="modal--button-container modal--2-button-container">
+            <div class="modal--button-ok">
+                <button (click)="onOkClicked()">{{modalConfig.okButtonLabel?modalConfig.okButtonLabel:'ok'}}</button>
+            </div>
+            <div class="modal--button-cancel">
+                <button *ngIf="modalConfig.cancelButtonLabel" (click)="onCancelClicked()">
+                    {{modalConfig.cancelButtonLabel?modalConfig.cancelButtonLabel:'cancel'}}
+                </button>
+            </div>
+        </div>
+        <ng-template #elseButton>
+            <div class="modal--button-container">
+                <div class="modal--button-ok">
+                    <button (click)="onOkClicked()">{{modalConfig.okButtonLabel?modalConfig.okButtonLabel:'ok'}}</button>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>>

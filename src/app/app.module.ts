@@ -41,6 +41,12 @@ import { SettingListComponent } from './component/setting-list/setting-list.comp
 import { FormCheckboxComponent } from './component/form-checkbox/form-checkbox.component';
 import { MagazineListComponent } from './page/magazine-list/magazine-list.component';
 import { MagazineEditComponent } from './page/magazine-edit/magazine-edit.component';
+import { WikiEditComponent } from './page/wiki-edit/wiki-edit.component';
+import { FormMarkdownEditorComponent } from './component/form-markdown-editor/form-markdown-editor.component';
+import { WikiShowComponent } from './page/wiki-show/wiki-show.component';
+import { Mk2htmlPipe } from './pipe/mk2html.pipe';
+import { LoadingSpinnerComponent } from './component/loading-spinner/loading-spinner.component';
+import { ModalComponent } from './component/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -78,14 +84,20 @@ import { MagazineEditComponent } from './page/magazine-edit/magazine-edit.compon
     SettingListComponent,
     FormCheckboxComponent,
     MagazineListComponent,
-    MagazineEditComponent
+    MagazineEditComponent,
+    WikiEditComponent,
+    FormMarkdownEditorComponent,
+    WikiShowComponent,
+    Mk2htmlPipe,
+    LoadingSpinnerComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-	ApiModule,
-	HttpClientModule,
-	FormsModule
+	  ApiModule,
+	  HttpClientModule,
+	  FormsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService,multi:true}
