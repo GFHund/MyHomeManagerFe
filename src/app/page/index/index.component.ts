@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import { ModalService } from 'src/app/service/modal/modal.service';
 
 @Component({
   selector: 'app-index-component',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modalService: ModalService) { }
 
   ngOnInit(): void {
+  }
+
+  onclick(){
+    this.modalService.createModal({title:'Test',message:'Dies ist ein Test',okButtonEvent:()=>{
+      this.modalService.closeModal();
+    }});
   }
 
 }

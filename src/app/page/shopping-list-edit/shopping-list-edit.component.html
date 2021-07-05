@@ -2,7 +2,7 @@
 
     <form (ngSubmit)="onSave(form.value)" #form="ngForm">
         <app-form-input label="Title" [(ngModel)]="obj.title" name="title"></app-form-input>
-        <app-form-submit label="Speichern"></app-form-submit>
+        <app-form-submit>Speichern</app-form-submit>
     </form>
     <app-action-button *ngIf="!isNew" (onClickEvent)="onAddProduct($event)">Produkt Hinzufügen</app-action-button>
     <app-accordeon *ngFor="let mapping of mappings" [title]="mapping.productTitle">

@@ -1,5 +1,5 @@
 <form (ngSubmit)="onSave(form.value)" #form="ngForm">
     <app-form-input label="Schritt" [(ngModel)]="step.stepnumber" name="stepnumber"></app-form-input>
     <app-form-textarea label="Beschreibung" [(ngModel)]="step.description" name="description"></app-form-textarea>
-    <app-form-submit label="Speichern"></app-form-submit>
+    <app-form-submit>Speichern</app-form-submit>
 </form>

@@ -1,0 +1,14 @@
+@import "../../../variables.scss";
+button{
+    display:block;
+	padding:1rem 1.5rem 1rem 1.5rem;
+	background-color: $blue-bg;
+	color:$white;
+	text-decoration: none;
+    width:100%;
+    border:none;
+	&:hover{
+		text-decoration: none;
+		color:$black;
+	}
+}

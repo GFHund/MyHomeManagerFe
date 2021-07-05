@@ -18,6 +18,7 @@ import { SettingComponent } from './page/setting/setting.component';
 import { MagazineListComponent } from './page/magazine-list/magazine-list.component';
 import { WikiEditComponent } from './page/wiki-edit/wiki-edit.component';
 import { WikiShowComponent } from './page/wiki-show/wiki-show.component';
+import { AppSettingComponent } from './page/app-setting/app-setting.component';
 
 const routes: Routes = [
 {path: '', component: IndexComponent},
@@ -41,6 +42,7 @@ const routes: Routes = [
 {path: 'wiki/:id/view',component: WikiShowComponent},
 {path: 'magazine',component: MagazineListComponent},
 {path: 'user-managment/list', component: UserManagmentListComponent},
+{path: 'app-settings',component:AppSettingComponent},
 {path: 'settings',component: SettingComponent}
 ];
 

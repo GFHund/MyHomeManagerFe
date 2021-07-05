@@ -48,6 +48,8 @@ import { Mk2htmlPipe } from './pipe/mk2html.pipe';
 import { LoadingSpinnerComponent } from './component/loading-spinner/loading-spinner.component';
 import { ModalComponent } from './component/modal/modal.component';
 import { ToastComponent } from './component/toast/toast.component';
+import { ErrorInterceptorService } from './core/interceptor/error-interceptor.service';
+import { AppSettingComponent } from './page/app-setting/app-setting.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +95,7 @@ import { ToastComponent } from './component/toast/toast.component';
     LoadingSpinnerComponent,
     ModalComponent,
     ToastComponent,
+    AppSettingComponent,
   ],
   imports: [
     BrowserModule,
@@ -102,7 +105,8 @@ import { ToastComponent } from './component/toast/toast.component';
 	  FormsModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService,multi:true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService,multi:true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService,multi:true}
   ],
   bootstrap: [AppComponent]
 })

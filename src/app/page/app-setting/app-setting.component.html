@@ -1,0 +1,17 @@
+<layout-frame>
+    <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+        <div class="form-row">
+            <div class="form-label">Demo Daten</div>
+            <div clasS="form-control">
+                <app-form-checkbox label="" [(ngModel)]="appSettings.demoData" name="demoData"></app-form-checkbox>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-label">Offline Daten</div>
+            <div clasS="form-control">
+                <app-form-checkbox [disable]="appSettings.demoData" label="" [(ngModel)]="appSettings.offlineData" name="offlineData"></app-form-checkbox>
+            </div>
+        </div>
+        <app-form-submit>Speichern</app-form-submit>
+    </form>
+</layout-frame>

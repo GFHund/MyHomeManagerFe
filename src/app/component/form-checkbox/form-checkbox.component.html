@@ -1,1 +1,7 @@
-<p>form-checkbox works!</p>
+<label [class.disable]="disable">
+    {{label}}
+    <input type="checkbox" class="checkbox-element" [checked]="bValue" [disabled]="disable" (click)="onClick(checkbox.checked)" #checkbox>
+    <div class="checkbox-container">
+        <div class="checkbox-bullet"></div>
+    </div>
+</label>
