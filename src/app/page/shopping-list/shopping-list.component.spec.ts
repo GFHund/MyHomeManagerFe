@@ -1,20 +1,25 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ShoppingListNgServiceMock } from 'src/app/Mock/ShoppingListNgServiceMock';
+import { ShoppingListNgService } from 'src/app/service/shoppingListNg/shopping-list-ng.service';
 
-import { ShoppingListComponentComponent } from './shopping-list-component.component';
+import { ShoppingListComponent } from './shopping-list.component';
 
-describe('ShoppingListComponentComponent', () => {
-  let component: ShoppingListComponentComponent;
-  let fixture: ComponentFixture<ShoppingListComponentComponent>;
+describe('ShoppingListComponent', () => {
+  let component: ShoppingListComponent;
+  let fixture: ComponentFixture<ShoppingListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ShoppingListComponentComponent ]
+      declarations: [ ShoppingListComponent ],
+      providers:[
+        {provide: ShoppingListNgService,useClass:ShoppingListNgServiceMock}
+      ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ShoppingListComponentComponent);
+    fixture = TestBed.createComponent(ShoppingListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

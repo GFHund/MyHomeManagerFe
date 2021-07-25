@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { WikiNgServiceMock } from 'src/app/Mock/WikiNgServiceMock';
+import { WikiNgService } from 'src/app/service/wikiNg/wiki-ng.service';
 
 import { WikiListComponent } from './wiki-list.component';
 
@@ -8,7 +10,10 @@ describe('WikiListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WikiListComponent ]
+      declarations: [ WikiListComponent ],
+      providers:[
+        {provide: WikiNgService, useClass: WikiNgServiceMock}
+      ]
     })
     .compileComponents();
   });

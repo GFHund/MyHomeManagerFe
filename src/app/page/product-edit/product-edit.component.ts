@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductNg } from 'src/app/model/ProductNg';
@@ -14,6 +14,7 @@ export class ProductEditComponent implements OnInit {
 
 	product: ProductNg = {id:'',productName:''};
 	isNew: boolean = false;
+	@ViewChild('form') form?:NgForm = undefined;
 
   constructor(private productService:ProductNgService, private route:ActivatedRoute,private router:Router) { }
 

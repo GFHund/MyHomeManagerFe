@@ -9,6 +9,11 @@ header{
 	background-color:$blue-bg;
 	padding:0 5px;
 }
+.right-side{
+	float:right;
+	padding:10px;
+	color: $white;
+}
 .content-container{
 	position:relative;
 }

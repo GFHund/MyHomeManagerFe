@@ -1,4 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { ProductNgServiceMock } from 'src/app/Mock/ProductNgServiceMock';
+import { RecipeNgServiceMock } from 'src/app/Mock/RecipeNgServiceMock';
+import { ProductNgService } from 'src/app/service/productNg/product-ng.service';
+import { RecipeNgService } from 'src/app/service/recipeNg/recipe-ng.service';
+import { FormInputComponent } from '../form-input/form-input.component';
 
 import { RecipeIncredientEditComponent } from './recipe-incredient-edit.component';
 
@@ -8,7 +14,12 @@ describe('RecipeIncredientEditComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RecipeIncredientEditComponent ]
+      declarations: [ RecipeIncredientEditComponent,FormInputComponent ],
+      imports:[FormsModule],
+      providers:[
+        {provide:ProductNgService, useClass:ProductNgServiceMock},
+        {provide:RecipeNgService, useClass:RecipeNgServiceMock}
+      ]
     })
     .compileComponents();
   });

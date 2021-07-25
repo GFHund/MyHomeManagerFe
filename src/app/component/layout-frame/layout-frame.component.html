@@ -5,6 +5,9 @@
 	<a *ngIf="returnPath">
 		<app-icon icon="arrow-left" [routerLink]="returnPath" ></app-icon>
 	</a>
+	<div class="right-side">
+		{{appMode}}
+	</div>
 </header>
 <div class="content-container">
 	<nav #navigation [ngClass]="{'nav-open':navClass}">

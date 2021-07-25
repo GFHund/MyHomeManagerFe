@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ProductNgServiceMock } from 'src/app/Mock/ProductNgServiceMock';
+import { ProductNgService } from 'src/app/service/productNg/product-ng.service';
 
 import { ProductListComponent } from './product-list.component';
 
@@ -8,7 +10,10 @@ describe('ProductListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProductListComponent ]
+      declarations: [ ProductListComponent ],
+      providers:[
+        {provide: ProductNgService, useClass: ProductNgServiceMock}
+      ]
     })
     .compileComponents();
   });

@@ -1,8 +1,8 @@
 <label [class]="labelClass">
-	<input type="text" [value]="value" (keyup)="onKeyup($event)" />
+	<input type="text" [value]="shownValue" (keyup)="onKeyup($event)" />
 	<span>{{label}}:</span>
 	
 </label>
 <div class="options-container">
-	<div *ngFor="let option of options" class="options" (click)="onClickOption(option)">{{option}}</div>
+	<div *ngFor="let option of options;index as i" class="options" (click)="onClickOption(i)">{{option}}</div>
 </div>

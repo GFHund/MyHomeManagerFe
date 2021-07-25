@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SettingNgServiceMock } from 'src/app/Mock/SettingNgServiceMock';
+import { SettingNgService } from 'src/app/service/setting/setting-ng.service';
 
 import { SettingComponent } from './setting.component';
 
@@ -8,7 +10,10 @@ describe('SettingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SettingComponent ]
+      declarations: [ SettingComponent ],
+      providers:[
+        {provide: SettingNgService, useClass: SettingNgServiceMock}
+      ]
     })
     .compileComponents();
   });

@@ -41,10 +41,18 @@ export class ToDoListNgService {
   }
 
   convert(toDoList:ToDoListGet):ToDoListNg{
+    if(toDoList){
+      return {
+        id: toDoList.id ?? '',
+        title: toDoList.title ?? '',
+        active: toDoList.active ?? false,
+        items:[]
+      };
+    }
     return {
-      id: toDoList.id ?? '',
-      title: toDoList.title ?? '',
-      active: toDoList.active ?? false,
+      id: '',
+      title: '',
+      active: false,
       items:[]
     };
   }

@@ -18,7 +18,7 @@ export class IconComponent implements OnInit {
 	@ViewChild('icon') iconElement?: ElementRef;
 	iconSvg = '';
 
-  constructor(protected http:HttpClient) {
+  constructor() {
 	
  }
 

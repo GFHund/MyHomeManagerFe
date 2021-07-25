@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ProductService, ProductGet, ProductWrite } from 'src/OpenApi';
 import { Observable } from 'rxjs';
-import { mergeMap,map } from 'rxjs/operators';
+import { mergeMap,map, tap } from 'rxjs/operators';
 import { ProductNg } from 'src/app/model/ProductNg';
 import { FormSelectInterface, SelectOptions } from 'src/app/interfaces/formSelectInterface';
+import { AppSettingsService } from '../appSettings/app-settings.service';
+import { AppModes } from 'src/app/model/AppSettings';
+import { LocalStorageService } from '../localStorage/local-storage.service';
 
 
 @Injectable({
@@ -11,99 +14,144 @@ import { FormSelectInterface, SelectOptions } from 'src/app/interfaces/formSelec
 })
 export class ProductNgService implements FormSelectInterface {
 
-  constructor(public productService: ProductService) {
+  constructor(public productService: ProductService,
+    private appSetting:AppSettingsService,
+    private localStorage:LocalStorageService) {
     this.productService.configuration.basePath = 'http://127.0.0.1:8080';
    }
 
   getList(ids?: string[]): Observable<ProductNg[]>{
-    //this.productService.getProducts();
-    let observable:Observable<ProductGet[]>;
-    if(true){
-      observable = this.productService.getProducts();
-    }else{
-      observable = new Observable<ProductGet[]>(subscriber => {
-        setTimeout(() => {
-          const list = this.getMockData();
-          if(ids){
-            let ret = [];
-            for(const i in ids){
-              if(!ids.hasOwnProperty(i)){
-                continue;
-              }
-  
-              for(const k in list){
-                if(!list.hasOwnProperty(k)){
+    return this.appSetting.getMode().pipe(mergeMap((mode) => {
+      let observable:Observable<ProductGet[]>;
+      if(mode == AppModes.DEMO){
+        observable = new Observable<ProductGet[]>(subscriber => {
+          setTimeout(() => {
+            const list = this.getMockData();
+            if(ids){
+              let ret = [];
+              for(const i in ids){
+                if(!ids.hasOwnProperty(i)){
                   continue;
                 }
-  
-                if(ids[i] === list[k].id){
-                  ret.push(list[k]);
+    
+                for(const k in list){
+                  if(!list.hasOwnProperty(k)){
+                    continue;
+                  }
+    
+                  if(ids[i] === list[k].id){
+                    ret.push(list[k]);
+                  }
                 }
               }
+              subscriber.next(ret);
+            }else {
+              subscriber.next(list);
             }
+          }, 1000);
+        });
+      } else if(mode == AppModes.OFFLINE){
+        observable = new Observable((subscriber) => {
+          let sObj = this.localStorage.get('products').subscribe((sObj) => {
+            let oObj = JSON.parse(sObj);
+            let ret:ProductGet[] = oObj.obj as ProductGet[];
             subscriber.next(ret);
-          }else {
-            subscriber.next(list);
-          }
-        }, 1000);
-      });
-    }
-    let observable2 = observable.pipe(map((products:ProductGet[]) => {
-			let ret:ProductNg[] =[];
-			for(const product in products){
-				if(!products.hasOwnProperty(product)) continue;
-				ret.push(this.convert(products[product]));
-			}
-			return ret;
-		}));
-    return observable2;
+          },(error) => {
+            subscriber.error('offline Data not found');
+          });
+        });
+      } else {
+        observable = this.productService.getProducts().pipe(tap((products) => {
+          let cacheObj = {time:((new Date()).getTime() / 1000),obj:products};
+          let sCacheObj = JSON.stringify(cacheObj);
+          this.localStorage.set('products',sCacheObj);
+        }));
+      }
+
+      let observable2 = observable.pipe(map((products:ProductGet[]) => {
+        let ret:ProductNg[] =[];
+        for(const product in products){
+          if(!products.hasOwnProperty(product)) continue;
+          ret.push(this.convert(products[product]));
+        }
+        return ret;
+      }));
+      return observable2;
+    }));
   }
 
   getProduct(productId:string): Observable<ProductNg>{
-    //this.productService.getProduct
-    let observable:Observable<ProductGet>;
-    if(true){
-      observable = this.productService.getProduct(productId);
-    }else {
-      observable = new Observable<ProductGet>(subscriber => {
-        setTimeout(() => {
-          const list = this.getMockData();
-          let ret = null;
-          for(const k in list){
-            if(!list.hasOwnProperty(k)){
-              continue;
+    return this.appSetting.getMode().pipe(mergeMap((mode) => {
+      let observable:Observable<ProductGet>;
+      if(mode == AppModes.DEMO){
+        observable = new Observable<ProductGet>(subscriber => {
+          setTimeout(() => {
+            const list = this.getMockData();
+            let ret = null;
+            for(const k in list){
+              if(!list.hasOwnProperty(k)){
+                continue;
+              }
+              if(list[k].id === productId){
+                ret = list[k];
+              }
             }
-            if(list[k].id === productId){
-              ret = list[k];
+            if(ret){
+              subscriber.next(ret);
+            } else {
+              subscriber.next({id: 'notFound', productName: 'Not Found'} as ProductGet)
             }
-          }
-          if(ret){
+          },1000);
+        });
+      } else if(mode == AppModes.OFFLINE){
+        observable = new Observable((subscriber) => {
+          let sObj = this.localStorage.get('product'+productId).subscribe((sObj) => {
+            let oObj = JSON.parse(sObj);
+            let ret:ProductGet = oObj.obj as ProductGet;
             subscriber.next(ret);
-          } else {
-            subscriber.next({id: 'notFound', productName: 'Not Found'} as ProductGet)
-          }
-        },1000);
-      });
-    }
-    let observable2 = observable.pipe(map((product:ProductGet)=>{
-			return this.convert(product);
-		}));
-    return observable2;
-  }
-	createProduct(product:ProductNg):Observable<ProductNg>{
-    if(true){
-      let productWrite: ProductWrite = {productName:product.productName};
-      return this.productService.createProduct(productWrite).pipe(map((product:ProductGet)=>{
+          },(error) => {
+            subscriber.error('offline Data not found');
+          });
+        })
+      } else {
+        observable = this.productService.getProduct(productId).pipe(tap((product) => {
+          let cacheObj = {time:((new Date()).getTime() / 1000),obj:product};
+          let sCacheObj = JSON.stringify(cacheObj);
+          this.localStorage.set('product'+productId,sCacheObj);
+        }));
+      }
+      let observable2 = observable.pipe(map((product:ProductGet)=>{
         return this.convert(product);
       }));
+      return observable2;
+    }));
+    
+  }
+	createProduct(product:ProductNg):Observable<ProductNg>{
+    return this.appSetting.getMode().pipe(mergeMap((mode) => {
+      if(mode == AppModes.DEMO){
+        product.id = product.productName;
+        return new Observable<ProductNg>(subscriber => {
+          setTimeout(() => {
+            subscriber.next(product);
+          },1000);
+        });
+      } else if(mode == AppModes.OFFLINE){
+        return new Observable<ProductNg>((subscriber) => {
+          subscriber.error('App is in Offline Mode');
+        })
+      } else {
+        let productWrite: ProductWrite = {productName:product.productName};
+        return this.productService.createProduct(productWrite).pipe(map((product:ProductGet)=>{
+          return this.convert(product);
+        }));
+      }
+    }));
+    if(true){
+      
     }
     else {
-      product.id = product.productName;
-      return new Observable<ProductNg>(subscriber => {
-        setTimeout(() => {
-          subscriber.next(product);
-        },1000);
-      });
+      
     }
 	}
 	updateProduct(product:ProductNg){

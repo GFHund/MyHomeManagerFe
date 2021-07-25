@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AppSettings } from 'src/app/model/AppSettings';
+import { AppSettingsService } from 'src/app/service/appSettings/app-settings.service';
 import { LocalStorageService } from 'src/app/service/localStorage/local-storage.service';
 import { ToastService } from 'src/app/service/toast/toast.service';
 
@@ -12,27 +13,15 @@ import { ToastService } from 'src/app/service/toast/toast.service';
 export class AppSettingComponent implements OnInit {
 
   appSettings: AppSettings = {
-    demoData: false,
-    offlineData: false
+    mode:-1
   };
 
-  constructor(private localStorage:LocalStorageService,private toastService:ToastService) { }
+  constructor(private localStorage:LocalStorageService,private toastService:ToastService,private appSettingsService:AppSettingsService) { }
 
   ngOnInit(): void {
-    
-    for(const i in this.appSettings){
-      if(this.appSettings.hasOwnProperty(i)){
-        
-        let setting = this.appSettings[i as keyof AppSettings];
-        let value = this.localStorage.get(i)
-        if(value === null){
-          this.localStorage.set(i,''+setting);
-        } else {
-          this.appSettings[i as keyof AppSettings] = value ==='true';
-        }
-      }
-    }
-    
+    this.appSettingsService.getMode().subscribe((value) => {
+      this.appSettings.mode = value;
+    })
   }
 
   onSubmit(form:NgForm){

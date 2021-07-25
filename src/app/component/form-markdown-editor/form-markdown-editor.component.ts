@@ -4,7 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 //import * as SimpleMDE from 'simplemde/index';
 //import { SimpleMDE } from 'simplemde';
 //import { SimpleMDE } from 'simplemde/src/js/simplemde.js'
-const SimpleMDE = require('simplemde');
+import SimpleMDE from 'simplemde';
 
 @Component({
   selector: 'app-form-markdown-editor',

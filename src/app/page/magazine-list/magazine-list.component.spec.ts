@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MagazinesNgServiceMock } from 'src/app/Mock/MagazinesNgServiceMock';
+import { MagazinesNgService } from 'src/app/service/magazinesNg/magazines-ng.service';
 
 import { MagazineListComponent } from './magazine-list.component';
 
@@ -8,7 +10,10 @@ describe('MagazineListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MagazineListComponent ]
+      declarations: [ MagazineListComponent ],
+      providers:[
+        {provide:MagazinesNgService, useClass:MagazinesNgServiceMock}
+      ]
     })
     .compileComponents();
   });

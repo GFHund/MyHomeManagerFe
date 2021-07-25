@@ -1,4 +1,9 @@
+export enum AppModes{
+    LIVE = 0,
+    OFFLINE = 1,
+    DEMO = 2
+}
+
 export interface AppSettings{
-    demoData:boolean;
-    offlineData:boolean;
+    mode:AppModes;
 }
