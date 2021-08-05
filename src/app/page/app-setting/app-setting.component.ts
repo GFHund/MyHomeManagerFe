@@ -20,7 +20,12 @@ export class AppSettingComponent implements OnInit {
 
   ngOnInit(): void {
     this.appSettingsService.getMode().subscribe((value) => {
-      this.appSettings.mode = value;
+      if(value === null){
+        this.appSettings.mode = -1;
+      } else {
+        this.appSettings.mode = value;
+      }
+      
     })
   }
 

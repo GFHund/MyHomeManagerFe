@@ -32,9 +32,14 @@ export class MagazinesNgService {
       } else if(mode == AppModes.OFFLINE){
         return new Observable<MagazinesNg[]>((subscriber) => {
           let sObj = this.localStorage.get('products').subscribe((sObj) => {
-            let oObj = JSON.parse(sObj);
-            let ret:MagazinesNg[] = oObj.obj as MagazinesNg[];
-            subscriber.next(ret);
+            if(sObj === null){
+              subscriber.next([]);
+            } else {
+              let oObj = JSON.parse(sObj);
+              let ret:MagazinesNg[] = oObj.obj as MagazinesNg[];
+              subscriber.next(ret);
+            }
+            
           },(error) => {
             subscriber.error('offline Data not found');
           });

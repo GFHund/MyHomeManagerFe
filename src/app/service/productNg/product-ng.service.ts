@@ -53,9 +53,14 @@ export class ProductNgService implements FormSelectInterface {
       } else if(mode == AppModes.OFFLINE){
         observable = new Observable((subscriber) => {
           let sObj = this.localStorage.get('products').subscribe((sObj) => {
-            let oObj = JSON.parse(sObj);
-            let ret:ProductGet[] = oObj.obj as ProductGet[];
-            subscriber.next(ret);
+            if(sObj === null){
+              subscriber.next([]);
+            }else {
+              let oObj = JSON.parse(sObj);
+              let ret:ProductGet[] = oObj.obj as ProductGet[];
+              subscriber.next(ret);
+            }
+            
           },(error) => {
             subscriber.error('offline Data not found');
           });
@@ -106,9 +111,14 @@ export class ProductNgService implements FormSelectInterface {
       } else if(mode == AppModes.OFFLINE){
         observable = new Observable((subscriber) => {
           let sObj = this.localStorage.get('product'+productId).subscribe((sObj) => {
-            let oObj = JSON.parse(sObj);
-            let ret:ProductGet = oObj.obj as ProductGet;
-            subscriber.next(ret);
+            if(sObj === null){
+              subscriber.next({id:'',productName:''});
+            } else {
+              let oObj = JSON.parse(sObj);
+              let ret:ProductGet = oObj.obj as ProductGet;
+              subscriber.next(ret);
+            }
+            
           },(error) => {
             subscriber.error('offline Data not found');
           });

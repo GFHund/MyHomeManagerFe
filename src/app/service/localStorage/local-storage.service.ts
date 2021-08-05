@@ -22,9 +22,9 @@ export class LocalStorageService {
     
   }
 
-  get(key:string): Observable<string>{
+  get(key:string): Observable<string|null>{
     if(Capacitor.isNativePlatform()){
-      return new Observable<string>((subscriber) => {
+      return new Observable<string|null>((subscriber) => {
         Storage.get({key:key}).then((value) => {
           subscriber.next(value.value??'');
         }).catch((reason) => {
@@ -33,12 +33,13 @@ export class LocalStorageService {
       })
     } else {
       if(window.localStorage){
-        return new Observable<string>((subscriber) => {
+        return new Observable<string|null>((subscriber) => {
           let value = window.localStorage.getItem(key);
           if(value){
             subscriber.next(value)
           } else {
-            subscriber.error('key Not Found');
+            //subscriber.error('key Not Found');
+            subscriber.next(null);
           }
           
         })
@@ -55,14 +56,20 @@ export class LocalStorageService {
     }
   }
 
-  getBoolean(key:string):Observable<boolean>{
+  getBoolean(key:string):Observable<boolean|null>{
     return this.get(key).pipe(map((value) => {
+      if(value === null){
+        return value;
+      }
       return key === 'true';
     }));
   }
 
-  getNumber(key:string):Observable<number>{
+  getNumber(key:string):Observable<number|null>{
     return this.get(key).pipe(map((value)=> {
+      if(value === null){
+        return value;
+      }
       let iValue = parseInt(value);
       if(isNaN(iValue)){
         throw new Error('value is not a number');

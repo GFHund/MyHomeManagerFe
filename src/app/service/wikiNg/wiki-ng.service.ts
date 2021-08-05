@@ -19,7 +19,7 @@ export class WikiNgService {
   }
 
   getWikiPages():Observable<WikiPageNg[]>{
-    return this.appSetting.getMode().pipe(mergeMap((mode:AppModes) => {
+    return this.appSetting.getMode().pipe(mergeMap((mode:AppModes|null) => {
       if(mode == AppModes.DEMO){
         return new Observable<WikiPageNg[]>((subscriber) => {
           setTimeout(() => {
@@ -29,14 +29,19 @@ export class WikiNgService {
       } else if(mode == AppModes.OFFLINE) {
         return new Observable<WikiPageNg[]>((subscriber) => {
           let sObj = this.localStorage.get('wikiPageList').subscribe((sObj) => {
-            let oObj = JSON.parse(sObj);
-            let ret:WikiPageNg[] = oObj.obj as WikiPageNg[];
-            subscriber.next(ret);
+            if(sObj === null){
+              subscriber.next([]);
+            } else {
+              let oObj = JSON.parse(sObj);
+              let ret:WikiPageNg[] = oObj.obj as WikiPageNg[];
+              subscriber.next(ret);
+            }
+            
           },(error) => {
             subscriber.error('offline Data not found');
           });
         });
-      } else {
+      } else if(mode == AppModes.LIVE) {
         return this.wikiService.getWikiPages().pipe(map(
           (retrivedWikiPage:WikiPageGet[]) => {
             let ret: WikiPageNg[] = [];
@@ -57,13 +62,15 @@ export class WikiNgService {
           let sCacheObj = JSON.stringify(cacheObj);
           this.localStorage.set('wikiPageList',sCacheObj);
         }));
+      } else {
+        return new Observable<WikiPageNg[]>((subscriber) => {subscriber.next([]);});
       }
     }));
   }
   getWikiPage(id:string):Observable<WikiPageNg>{
     let demoData = this.appSetting.getDemoData();
     let offlineData = this.appSetting.getOfflineData();
-    return this.appSetting.getMode().pipe(mergeMap((mode:AppModes) => {
+    return this.appSetting.getMode().pipe(mergeMap((mode:AppModes|null) => {
       if(mode == AppModes.DEMO){
         return new Observable<WikiPageNg>((subscriber) => {
           setTimeout(()=>{
@@ -73,14 +80,19 @@ export class WikiNgService {
       } else if (mode == AppModes.OFFLINE) {
         return new Observable<WikiPageNg>((subscriber) => {
           this.localStorage.get('wikiPage'+id).subscribe((sObj) => {
-            let oObj = JSON.parse(sObj);
-            let ret:WikiPageNg = oObj.obj as WikiPageNg;
-            subscriber.next(ret);
+            if(sObj === null){
+              subscriber.next({id:'',text:'',title:''});
+            } else {
+              let oObj = JSON.parse(sObj);
+              let ret:WikiPageNg = oObj.obj as WikiPageNg;
+              subscriber.next(ret);
+            }
+            
           },(error) => {
             subscriber.error('offline Data not found');
           });
         });
-      } else {
+      } else if(mode == AppModes.LIVE) {
         return this.wikiService.getWikiPage(id).pipe(map(
           (retrivedWikiPage:WikiPageGet) => {
             return {
@@ -94,6 +106,10 @@ export class WikiNgService {
           let sCacheObj = JSON.stringify(cacheObj);
           this.localStorage.set('wikiPage'+id,sCacheObj);
         }));
+      } else {
+        return new Observable<WikiPageNg>((subscriber) => {
+          subscriber.next({id:'',text:'',title:''})
+        });
       }
     }));
   }

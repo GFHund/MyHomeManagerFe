@@ -27,6 +27,8 @@ export class LayoutFrameComponent implements OnInit {
       } else {
         this.appMode = 'Unknown';
       }
+    },error=>{
+      console.log(error);
     })
   }
 

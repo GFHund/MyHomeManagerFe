@@ -20,6 +20,9 @@ export class LoginComponent implements OnInit {
 		let value = form.value;
 		this.loginSerivce.login(value.user,value.password).subscribe((retValue:AuthReturn) => {
 			console.log(retValue);
+			if(retValue === null){
+				return;
+			}
 			if(retValue.success){
 				this.router.navigate(['/']);
 			}

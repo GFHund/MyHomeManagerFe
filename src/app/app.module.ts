@@ -50,6 +50,7 @@ import { ModalComponent } from './component/modal/modal.component';
 import { ToastComponent } from './component/toast/toast.component';
 import { ErrorInterceptorService } from './core/interceptor/error-interceptor.service';
 import { AppSettingComponent } from './page/app-setting/app-setting.component';
+import { FormRadioGroupDirective } from './directive/form-radio-group.directive';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { AppSettingComponent } from './page/app-setting/app-setting.component';
     ModalComponent,
     ToastComponent,
     AppSettingComponent,
+    FormRadioGroupDirective,
   ],
   imports: [
     BrowserModule,

@@ -19,6 +19,9 @@ export class LoginService {
 		return this.authService
 		.loginUser(loginObj)
 		.pipe(map((response) => {
+			if(response === null){
+				return response;
+			}
 			const bearerToken = response.token;
 			if(bearerToken){
 				const token = bearerToken.substr(6);

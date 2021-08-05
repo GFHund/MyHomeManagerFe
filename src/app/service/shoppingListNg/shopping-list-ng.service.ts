@@ -44,9 +44,14 @@ export class ShoppingListNgService implements FormSelectInterface {
       } else if(mode == AppModes.OFFLINE){
         observable = new Observable<ShoppingListNg[]>((subscriber) => {
           let sObj = this.localStorage.get('ShoppingList').subscribe((sObj) => {
-            let oObj = JSON.parse(sObj);
-            let ret:ShoppingListNg[] = oObj.obj as ShoppingListNg[];
-            subscriber.next(ret);
+            if(sObj === null){
+              subscriber.next([]);
+            } else {
+              let oObj = JSON.parse(sObj);
+              let ret:ShoppingListNg[] = oObj.obj as ShoppingListNg[];
+              subscriber.next(ret);
+            }
+            
           },(error) => {
             subscriber.error('offline Data not found');
           });
@@ -93,9 +98,14 @@ export class ShoppingListNgService implements FormSelectInterface {
       } else if(mode == AppModes.OFFLINE){
         observable = new Observable<ShoppingListGet>((subscriber)=>{
           let sObj = this.localStorage.get('ShoppingList'+id).subscribe((sObj) => {
-            let oObj = JSON.parse(sObj);
-            let ret:ShoppingListGet = oObj.obj as ShoppingListGet;
-            subscriber.next(ret);
+            if(sObj === null){
+              subscriber.next({id:'',title:''});
+            } else {
+              let oObj = JSON.parse(sObj);
+              let ret:ShoppingListGet = oObj.obj as ShoppingListGet;
+              subscriber.next(ret);
+            }
+            
           },(error) => {
             subscriber.error('offline Data not found');
           });
@@ -136,9 +146,14 @@ export class ShoppingListNgService implements FormSelectInterface {
       } else if(mode == AppModes.OFFLINE){
         return new Observable<ShoppingListMappingGet[]>((subscriber)=>{
           let sObj = this.localStorage.get('ShoppingListMapping'+id).subscribe((sObj) => {
-            let oObj = JSON.parse(sObj);
-            let ret:ShoppingListMappingGet[] = oObj.obj as ShoppingListMappingGet[];
-            subscriber.next(ret);
+            if(sObj === null){
+              subscriber.next([]);
+            } else {
+              let oObj = JSON.parse(sObj);
+              let ret:ShoppingListMappingGet[] = oObj.obj as ShoppingListMappingGet[];
+              subscriber.next(ret);
+            }
+            
           },(error) => {
             subscriber.error('offline Data not found');
           });
@@ -178,9 +193,14 @@ export class ShoppingListNgService implements FormSelectInterface {
       } else if(mode == AppModes.OFFLINE){
         return new Observable<ProductGet[]>((subscriber) => {
           let sObj = this.localStorage.get('ShoppingListProducts'+id).subscribe((sObj) => {
-          let oObj = JSON.parse(sObj);
-          let ret:ProductGet[] = oObj.obj as ProductGet[];
-          subscriber.next(ret);
+          if(sObj === null){
+            subscriber.next([]);
+          } else {
+            let oObj = JSON.parse(sObj);
+            let ret:ProductGet[] = oObj.obj as ProductGet[];
+            subscriber.next(ret);
+          }
+          
           },(error) => {
             subscriber.error('offline Data not found');
           });

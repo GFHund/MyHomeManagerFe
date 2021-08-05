@@ -17,11 +17,11 @@ export class AppSettingsService {
     })); 
   }
 
-  getDemoData():Observable<boolean>{
+  getDemoData():Observable<boolean|null>{
     return this.localStorage.getBoolean('demoData');
   }
 
-  getMode():Observable<AppModes>{
+  getMode():Observable<AppModes|null>{
     return this.localStorage.getNumber('mode');
   }
 }
