@@ -9,12 +9,14 @@ import { ShoppingListNgService } from 'src/app/service/shoppingListNg/shopping-l
 })
 export class ShoppingListComponent implements OnInit {
 
-  shoppingListList?: ShoppingList[]
+  shoppingListList?: ShoppingList[];
+  bLoading = true;
 
   constructor(public shoppingListService: ShoppingListNgService) { }
 
   ngOnInit(): void {
     this.shoppingListService.getList().subscribe((list: ShoppingList[]) => {
+      this.bLoading = false;
       this.shoppingListList = list;
     });
   }

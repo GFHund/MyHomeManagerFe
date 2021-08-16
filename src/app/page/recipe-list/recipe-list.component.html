@@ -15,9 +15,10 @@
 				<link-button (click)="onDeleteRecipe(recipe.id)">
 					<app-icon icon="cross"></app-icon>
 				</link-button>
-			</div>
-			
-			
+			</div>	
 		</div>
 	</div>
+	<div *ngIf="bLoading" class="spinner-container">
+        <app-loading-spinner></app-loading-spinner>
+    </div>
 </layout-frame>

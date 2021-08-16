@@ -10,12 +10,14 @@ import { MagazinesNgService } from 'src/app/service/magazinesNg/magazines-ng.ser
 export class MagazineListComponent implements OnInit {
 
   magazines:MagazinesNg[] = [];
+  bLoading = true;
 
   constructor(private magazineService:MagazinesNgService) { }
 
   ngOnInit(): void {
     this.magazineService.getMagazines().subscribe((magazines) => {
       this.magazines = magazines;
+      this.bLoading = false;
     });
   }
 

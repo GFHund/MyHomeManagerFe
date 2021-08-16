@@ -48,6 +48,7 @@ export class ShoppingListEditComponent implements OnInit {
 		  unit:'',
 		  productId:'',
 		  id:'',
+		  active:true,
 		  shoppingListId:this.obj.id});
   }
   onSave(values:any){

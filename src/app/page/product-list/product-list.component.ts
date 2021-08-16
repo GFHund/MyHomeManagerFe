@@ -10,11 +10,13 @@ import {ProductNg} from '../../model/ProductNg';
 export class ProductListComponent implements OnInit {
 
 	products: ProductNg[] = [];
+  bLoading = true;
 
   constructor(private productService:ProductNgService) { }
 
   ngOnInit(): void {
 		this.productService.getList().subscribe((articles:ProductNg[]) => {
+      this.bLoading = false;
 			this.products = articles;
 		});
   }

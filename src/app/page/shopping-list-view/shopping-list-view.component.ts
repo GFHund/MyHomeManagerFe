@@ -14,6 +14,7 @@ export class ShoppingListViewComponent implements OnInit {
 	id = '';
 	obj: ShoppingListGet = {id: '', title: ''};
 	mappings: ShoppingListProductNg[] = [];
+
   constructor(public shoppingListService: ShoppingListNgService,public route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -28,6 +29,13 @@ export class ShoppingListViewComponent implements OnInit {
 		    console.log(mappings);
 		  });			
 		});
+  }
+
+  toggleActive(index: any){
+	  console.log(index);
+	  console.log(this.mappings[index].active);
+	  this.mappings[index].active = !this.mappings[index].active;
+	  console.log(this.mappings[index].active);
   }
 
 }

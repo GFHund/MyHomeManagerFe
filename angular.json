@@ -68,6 +68,14 @@
                   "maximumError": "4kb"
                 }
               ]
+            },
+            "dev":{
+              "optimization": false,
+              "buildOptimizer": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           }
         },
@@ -79,6 +87,9 @@
           "configurations": {
             "production": {
               "browserTarget": "myHomeManagerFe:build:production"
+            },
+            "dev":{
+              "browserTarget": "myHomeManagerFe:build:dev"
             }
           }
         },

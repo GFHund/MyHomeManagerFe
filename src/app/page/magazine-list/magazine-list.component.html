@@ -5,7 +5,15 @@
                 <div class="title">
 					<a>{{magazine.name}}</a>
 				</div>
+                <div class="actions">
+                    <link-button [path]="['/magazine',magazine.id,'edit']">
+                        <app-icon icon="edit"></app-icon>
+                    </link-button>
+                </div>
             </div>
         </div>
+    </div>
+    <div *ngIf="bLoading" class="spinner-container">
+        <app-loading-spinner></app-loading-spinner>
     </div>
 </layout-frame>

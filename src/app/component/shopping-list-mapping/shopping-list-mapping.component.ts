@@ -10,7 +10,7 @@ import { ShoppingListNgService } from 'src/app/service/shoppingListNg/shopping-l
 })
 export class ShoppingListMappingComponent implements OnInit {
 
-  @Input() mapping: ShoppingListProductNg = {amount:0,productTitle:'',unit:'',productId:'',id:'',shoppingListId:''};
+  @Input() mapping: ShoppingListProductNg = {amount:0,productTitle:'',unit:'',productId:'',id:'',shoppingListId:'',active:true};
 
   constructor(public productService:ProductNgService,
     public shoppingListService:ShoppingListNgService) { }

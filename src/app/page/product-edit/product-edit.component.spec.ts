@@ -30,7 +30,7 @@ fdescribe('ProductEditComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductEditComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    //fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -67,15 +67,18 @@ fdescribe('ProductEditComponent', () => {
     const router = TestBed.inject(Router);
     router.navigateByUrl('product/new');
     await fixture.whenStable();
-    component.ngOnInit();
+    //component.ngOnInit();
     expect(component.isNew).toBeTruthy();
   });
 
   it('is not new Test', async() => {
+    fixture = TestBed.createComponent(ProductEditComponent);
+    component = fixture.componentInstance;
+    //fixture.detectChanges();
     const router = TestBed.inject(Router);
     router.navigateByUrl('product/abc123/edit');
     await fixture.whenStable();
-    component.ngOnInit();
+    //component.ngOnInit();  
     expect(component.isNew).toBeFalsy();
   });
 

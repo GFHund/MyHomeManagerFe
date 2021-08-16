@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { ProductNgService } from './product-ng.service';
 
-describe('ProductNgService', () => {
+fdescribe('ProductNgService', () => {
   let service: ProductNgService;
   let httpTestingController: HttpTestingController;
 
@@ -20,4 +20,13 @@ describe('ProductNgService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('get List',() => {
+    let ret = service.getList();
+    ret.subscribe(list => {
+      expect(list.length > 0).toBeTruthy();
+      expect(list[0].id).toEqual('eier');
+      expect(list[0].productName).toEqual('Eier');  
+    })
+  })
 });

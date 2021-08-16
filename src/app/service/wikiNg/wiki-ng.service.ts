@@ -173,7 +173,7 @@ export class WikiNgService {
 
   getMockupDataList(){
     return [
-      {id:'wikiPage1',title:'Dummy 1',text:'Dies ist eine Dummy Test seite'},
+      {id:'wikiPage1',title:'Dummy 1',text:'# Überschrift1\nDies ist eine Dummy Test seite:\n* 1\n* 2\n* 3'},
       {id:'wikiPage2',title:'Dummy 2',text:'Dies ist eine Dummy Test seite'},
     ]as WikiPageNg[];
   }

@@ -10,12 +10,14 @@ import { RecipeSimple } from 'src/OpenApi';
 export class RecipeListComponent implements OnInit {
 
   recipeList: RecipeSimple[] = [];
+  bLoading = true;
 
   constructor(public recipeService: RecipeNgService) { }
 
   ngOnInit(): void {
     this.recipeService.getList().subscribe((recipes) => {
       this.recipeList = recipes;
+      this.bLoading = false;
     })
   }
 

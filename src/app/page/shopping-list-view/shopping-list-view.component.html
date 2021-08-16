@@ -1,10 +1,14 @@
 <layout-frame returnPath="/shopping-list">
 	<h1>{{obj.title}}</h1>
 	<table>
-		<tr *ngFor="let mapping of mappings">
-			<td>{{mapping.amount}} {{mapping.unit}}</td>
-			<td>{{mapping.productTitle}}</td>
-			<td></td>
+		<tr *ngFor="let mapping of mappings;index as i">
+			<td [class.line-through]="!mapping.active">{{mapping.amount}} {{mapping.unit}}</td>
+			<td [class.line-through]="!mapping.active">{{mapping.productTitle}}</td>
+			<td>
+				<app-action-button class="line-through" (onClickEvent)="toggleActive(i)">
+					abc
+				</app-action-button>
+			</td>
 		</tr>
 	</table>
 </layout-frame>

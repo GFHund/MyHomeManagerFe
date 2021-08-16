@@ -236,6 +236,7 @@ export class ShoppingListNgService implements FormSelectInterface {
               productTitle: '',
               productId:'',
               id:mappings[index].id ?? '',
+              active:true,
               shoppingListId:id
             };
   

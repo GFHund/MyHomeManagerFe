@@ -1,3 +1,4 @@
+import { MagazineEditComponent } from './page/magazine-edit/magazine-edit.component';
 import { RecipeEditComponent } from './page/recipe-edit/recipe-edit.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -41,6 +42,7 @@ const routes: Routes = [
 {path: 'wiki/:id/edit',component: WikiEditComponent},
 {path: 'wiki/:id/view',component: WikiShowComponent},
 {path: 'magazine',component: MagazineListComponent},
+{path: 'magazine/:id/edit', component:MagazineEditComponent},
 {path: 'user-managment/list', component: UserManagmentListComponent},
 {path: 'app-settings',component:AppSettingComponent},
 {path: 'settings',component: SettingComponent}

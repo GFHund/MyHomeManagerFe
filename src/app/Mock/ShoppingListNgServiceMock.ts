@@ -36,7 +36,8 @@ export class ShoppingListNgServiceMock{
                     productId:'abc123',
                     productTitle:'productTitle',
                     shoppingListId:'abc123',
-                    unit:'g'
+                    unit:'g',
+                    active:true
                 }
             ]);
         });
