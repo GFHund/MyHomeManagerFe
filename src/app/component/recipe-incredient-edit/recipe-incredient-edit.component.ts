@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProductNgService } from 'src/app/service/productNg/product-ng.service';
 import { RecipeNgService } from 'src/app/service/recipeNg/recipe-ng.service';
+import { ToastService } from 'src/app/service/toast/toast.service';
 import { RecipeIncredientNg} from '../../model/RecipeIncredientNg';
 
 @Component({
@@ -20,7 +21,9 @@ export class RecipeIncredientEditComponent implements OnInit {
   };
   @Input() recipeId: string = '';
 
-  constructor(public productService:ProductNgService,private recipeService:RecipeNgService) { }
+  constructor(public productService:ProductNgService,
+    private recipeService:RecipeNgService,
+    public toastService:ToastService) { }
 
   ngOnInit(): void {
   }
@@ -41,9 +44,12 @@ export class RecipeIncredientEditComponent implements OnInit {
     if(isNew){
       this.recipeService.createRecipeIncredient(this.incredient).subscribe((incredient) => {
         this.incredient = incredient;
+        this.toastService.createToast('saved');
       });
     } else {
-      this.recipeService.updateRecipeIncredient(this.incredient).subscribe(()=>{});
+      this.recipeService.updateRecipeIncredient(this.incredient).subscribe(()=>{
+        this.toastService.createToast('saved');
+      });
     }
   }
 }

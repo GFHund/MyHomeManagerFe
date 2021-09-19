@@ -11,6 +11,7 @@ export class ProductListComponent implements OnInit {
 
 	products: ProductNg[] = [];
   bLoading = true;
+  sSearch:string = '';
 
   constructor(private productService:ProductNgService) { }
 
@@ -21,4 +22,13 @@ export class ProductListComponent implements OnInit {
 		});
   }
 
+  onChange(search:string){
+    this.sSearch = search;
+    
+  }
+  onDeleteProduct(id: string ){
+    this.productService.deleteProduct(id).subscribe(() => {
+      
+    })
+  }
 }

@@ -1,10 +1,18 @@
 <layout-frame>
 	<div class="actions-container">
 		<link-button path="/product/new">Neues Produkt</link-button>
+		<div class="search-container">
+			<app-search-input label="Suche" change=""></app-search-input>
+		</div>
 		<div class="list-container">
 			<div class="list-row" *ngFor="let product of products">
 				<div class="title">
 					<a [routerLink]="['/product',product.id,'edit']">{{product.productName}}</a>
+				</div>
+				<div class="row-actions">
+					<link-button (click)="onDeleteProduct(product.id)">
+					<app-icon icon="cross"></app-icon>
+				</link-button>
 				</div>
 			</div>
 		</div>

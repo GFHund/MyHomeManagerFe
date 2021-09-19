@@ -49,4 +49,23 @@ export class ProductEditComponent implements OnInit {
 		}
 	}
 
+	onSaveAndNew(){
+		if(!this.form?.valid){
+			console.log('Not Valid');
+			return;
+		}
+		let value = this.form?.value;
+		this.product.productName = value.title;
+		if(this.isNew){
+			
+			this.productService.createProduct(this.product).subscribe((newProduct:ProductNg) => {
+				this.router.navigate(['/product','new']);
+			});
+			
+			//console.log('executed');
+		}else{
+			this.productService.updateProduct(this.product).subscribe(()=>{});			
+		}
+	}
+
 }

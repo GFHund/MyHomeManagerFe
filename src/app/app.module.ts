@@ -51,6 +51,7 @@ import { ToastComponent } from './component/toast/toast.component';
 import { ErrorInterceptorService } from './core/interceptor/error-interceptor.service';
 import { AppSettingComponent } from './page/app-setting/app-setting.component';
 import { FormRadioGroupDirective } from './directive/form-radio-group.directive';
+import { SearchInputComponent } from './component/search-input/search-input.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { FormRadioGroupDirective } from './directive/form-radio-group.directive'
     ToastComponent,
     AppSettingComponent,
     FormRadioGroupDirective,
+    SearchInputComponent,
   ],
   imports: [
     BrowserModule,

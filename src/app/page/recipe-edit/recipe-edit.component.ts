@@ -7,6 +7,8 @@ import { RecipeStepGet } from './../../../OpenApi/model/recipeStepGet';
 import { RecipeGet } from './../../../OpenApi/model/recipeGet';
 import { Component, OnInit } from '@angular/core';
 import { VirtualTimeScheduler } from 'rxjs';
+import { ModalService } from 'src/app/service/modal/modal.service';
+import { ToastService } from 'src/app/service/toast/toast.service';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -24,7 +26,8 @@ export class RecipeEditComponent implements OnInit {
   constructor(private productService:ProductNgService, 
     private recipeService: RecipeNgService, 
     private route:ActivatedRoute,
-    private router:Router) { }
+    private router:Router,
+    public toastService:ToastService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -54,12 +57,16 @@ export class RecipeEditComponent implements OnInit {
     this.recipe.title = values.title;
     this.recipe.time = values.time;
     if(this.isNew){
+
       this.recipeService.createRecipe(this.recipe).subscribe((newRecipe:RecipeNg) => {
         this.router.navigate(['/recipe',newRecipe.id,'edit']);
       })
     } else {
-      this.recipeService.updateRecipe(this.recipe).subscribe(()=>{});
+      this.recipeService.updateRecipe(this.recipe).subscribe(()=>{
+        this.toastService.createToast('saved');
+      });
     }
+  
   }
 
   addStep(value:any){

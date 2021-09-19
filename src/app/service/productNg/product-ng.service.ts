@@ -171,6 +171,9 @@ export class ProductNgService implements FormSelectInterface {
 			},1000);
 		});
 	}
+  deleteProduct(productId:string){
+    return this.productService.deleteProduct(productId);
+  }
 	convert(productInput:ProductGet){
 		let ret:ProductNg = {
 			id:productInput.id ?? '',
