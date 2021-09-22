@@ -6,6 +6,7 @@ import { MagazinesNg } from 'src/app/model/MagazinesNg';
 import { MagazinesGet, MagazinesService } from 'src/OpenApi';
 import { AppSettingsService } from '../appSettings/app-settings.service';
 import { LocalStorageService } from '../localStorage/local-storage.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class MagazinesNgService {
   constructor(private magazinesService: MagazinesService,
     private appSetting:AppSettingsService,
     private localStorage:LocalStorageService) { 
-    magazinesService.configuration.basePath = 'http://127.0.0.1:8080';
+    magazinesService.configuration.basePath = environment.serverUrl;
   }
 
   getMagazines():Observable<MagazinesNg[]>{

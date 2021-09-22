@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { SettingGroup } from 'src/app/model/SettingGroup';
 import { SettingGet } from 'src/app/model/SettingGet';
 import { Setting } from 'src/app/model/Setting';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class SettingNgService {
   constructor(protected httpClient: HttpClient) { }
 
   getSettings(){
-    return this.httpClient.get<SettingGet[]>('http://localhost:8080/api/v1/setting').pipe(map((settings:SettingGet[]) =>{
+    let serverUrl = environment.serverUrl
+    return this.httpClient.get<SettingGet[]>(serverUrl + '/api/v1/setting').pipe(map((settings:SettingGet[]) =>{
       let ret:SettingGroup[] = [];
     
       for(let i in settings){
@@ -57,6 +59,7 @@ export class SettingNgService {
   }
 
   updateSettings(settings:any){
-    return this.httpClient.put('http://localhost:8080/api/v1/setting',settings);
+    let serverUrl = environment.serverUrl
+    return this.httpClient.put(serverUrl + '/api/v1/setting',settings);
   }
 }

@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { AuthReturn, AuthService, DefaultReturn } from 'src/OpenApi';
 import { Login } from 'src/OpenApi/model/login';
 import { SessionStorageService } from '../sessionStorage/session-storage.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class LoginService {
 
   constructor(public authService:AuthService,
 	public sessionStorageService:SessionStorageService) {
-	this.authService.configuration.basePath = 'http://127.0.0.1:8080';
+	this.authService.configuration.basePath = environment.serverUrl;
  }
 	public login(user:string, password:string):Observable<AuthReturn>{
 		let loginObj:Login = {username:user,passwort:password};

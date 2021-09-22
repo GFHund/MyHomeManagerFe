@@ -7,6 +7,7 @@ import { FormSelectInterface, SelectOptions } from 'src/app/interfaces/formSelec
 import { AppSettingsService } from '../appSettings/app-settings.service';
 import { AppModes } from 'src/app/model/AppSettings';
 import { LocalStorageService } from '../localStorage/local-storage.service';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -17,7 +18,7 @@ export class ProductNgService implements FormSelectInterface {
   constructor(public productService: ProductService,
     private appSetting:AppSettingsService,
     private localStorage:LocalStorageService) {
-    this.productService.configuration.basePath = 'http://127.0.0.1:8080';
+    this.productService.configuration.basePath = environment.serverUrl;
    }
 
   getList(ids?: string[]): Observable<ProductNg[]>{

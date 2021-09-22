@@ -6,7 +6,7 @@ import { WikiPageNg } from 'src/app/model/WikiPageNg';
 import { WikiPageGet, WikiPageWrite, WikiService } from 'src/OpenApi';
 import { AppSettingsService } from '../appSettings/app-settings.service';
 import { LocalStorageService } from '../localStorage/local-storage.service';
-
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -15,7 +15,7 @@ import { LocalStorageService } from '../localStorage/local-storage.service';
 export class WikiNgService {
 
   constructor(private wikiService: WikiService, private appSetting:AppSettingsService,private localStorage:LocalStorageService) { 
-    wikiService.configuration.basePath = 'http://127.0.0.1:8080';
+    wikiService.configuration.basePath = environment.serverUrl;
   }
 
   getWikiPages():Observable<WikiPageNg[]>{

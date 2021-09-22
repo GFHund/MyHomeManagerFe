@@ -10,7 +10,7 @@ import { RecipeStepNg } from 'src/app/model/RecipeStepNg';
 import { RecipeGet, RecipeIncredientGet, RecipeIncredientWrite, RecipeService, RecipeSimple, RecipeStepGet, RecipeStepWrite, RecipeWrite } from 'src/OpenApi';
 import { ProductNgService } from '../productNg/product-ng.service';
 import { AppModes } from 'src/app/model/AppSettings';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class RecipeNgService {
     public product: ProductNgService,
     private localStorage:LocalStorageService,
     private appSetting:AppSettingsService) {
-    this.recipeService.configuration.basePath = 'http://127.0.0.1:8080';
+    this.recipeService.configuration.basePath = environment.serverUrl;
    }
 
   getList(): Observable<RecipeSimple[]>{

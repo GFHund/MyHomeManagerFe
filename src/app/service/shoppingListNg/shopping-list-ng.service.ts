@@ -13,6 +13,7 @@ import { ProductNg } from 'src/app/model/ProductNg';
 import { AppSettingsService } from '../appSettings/app-settings.service';
 import { AppModes } from 'src/app/model/AppSettings';
 import { LocalStorageService } from '../localStorage/local-storage.service';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -24,7 +25,7 @@ export class ShoppingListNgService implements FormSelectInterface {
     public productService:ProductNgService,
     private appSetting:AppSettingsService,
     private localStorage:LocalStorageService) { 
-      this.shoppingList.configuration.basePath = 'http://127.0.0.1:8080';
+      this.shoppingList.configuration.basePath = environment.serverUrl;
     }
   //--------------------------------------------------------------------
   getList(): Observable<ShoppingListNg[]> {
