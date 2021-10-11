@@ -16,6 +16,7 @@ export class ShoppingListEditComponent implements OnInit {
 	obj: ShoppingListNg = {id: '', title: ''};
 	mappings: ShoppingListProductNg[] = [];
 	isNew: boolean = false;
+	onLoad = true;
 
   	constructor(public shoppingListService: ShoppingListNgService,
 		public route: ActivatedRoute,
@@ -32,10 +33,11 @@ export class ShoppingListEditComponent implements OnInit {
 				.subscribe((mappings: ShoppingListProductNg[]) => {
 					console.log(mappings);
 					this.mappings = mappings;
-					
+					this.onLoad = false;
 				});			
 				} else {
 					this.isNew = true;
+					this.onLoad = false;
 				}
 		});
 	}
@@ -44,7 +46,7 @@ export class ShoppingListEditComponent implements OnInit {
 	  console.log('Product Added');
 	  this.mappings.push({
 		  amount:0,
-		  productTitle:'',
+		  productTitle:'bla',
 		  unit:'',
 		  productId:'',
 		  id:'',
@@ -54,12 +56,16 @@ export class ShoppingListEditComponent implements OnInit {
   onSave(values:any){
 	  console.log(values);
 	  this.obj.title = values.title;
+	  this.onLoad = true;
 	  if(this.isNew){
 		this.shoppingListService.addShoppingList(this.obj).subscribe((newShoppingList:ShoppingListNg) => {
+			this.onLoad = false;
 			this.router.navigate(['/shopping-list',newShoppingList.id,'edit'])
 		});
 	  }else{
-		this.shoppingListService.updateShoppingList(this.obj).subscribe(()=>{});
+		this.shoppingListService.updateShoppingList(this.obj).subscribe(()=>{
+			this.onLoad = false;
+		});
 	  }
   }
 }

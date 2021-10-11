@@ -52,6 +52,10 @@ import { ErrorInterceptorService } from './core/interceptor/error-interceptor.se
 import { AppSettingComponent } from './page/app-setting/app-setting.component';
 import { FormRadioGroupDirective } from './directive/form-radio-group.directive';
 import { SearchInputComponent } from './component/search-input/search-input.component';
+import { SliderContainerComponent } from './component/slider-container/slider-container.component';
+import { SliderItemComponent } from './component/slider-item/slider-item.component';
+import { TabTableComponent } from './component/tab-table/tab-table.component';
+import { TabTableItemComponent } from './component/tab-table-item/tab-table-item.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +104,10 @@ import { SearchInputComponent } from './component/search-input/search-input.comp
     AppSettingComponent,
     FormRadioGroupDirective,
     SearchInputComponent,
+    SliderContainerComponent,
+    SliderItemComponent,
+    TabTableComponent,
+    TabTableItemComponent,
   ],
   imports: [
     BrowserModule,

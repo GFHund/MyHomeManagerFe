@@ -26,6 +26,9 @@ export class FormEntitySelectComponent implements OnInit, ControlValueAccessor {
   selectedValue: SelectOptions = {id:'',text:''};
   options:SelectOptions[] = [];
 
+  searchText='';
+  openSelect = false;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -60,7 +63,6 @@ export class FormEntitySelectComponent implements OnInit, ControlValueAccessor {
     //this.value = value;
     this.value = value;
     //this.selectedValue = value;
-    console.log(this.value);
     if(this.value){
       this.entityService?.getLabelFromId(this.value).subscribe((label:string) => {
         this.shownValue = label;
@@ -78,5 +80,10 @@ export class FormEntitySelectComponent implements OnInit, ControlValueAccessor {
     this.labelClass = 'not-empty';
     this.propagateChange(value.id);
 		this.propagateTouched();
+    this.openSelect = false;
+  }
+
+  toggleSelectMenu(){
+    this.openSelect = ! this.openSelect;
   }
 }

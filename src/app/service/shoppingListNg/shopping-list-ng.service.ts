@@ -245,20 +245,14 @@ export class ShoppingListNgService implements FormSelectInterface {
               if (!products.hasOwnProperty(index2)){
                 continue;
               }
-              console.log(products[index2].id);
-              console.log(mappings[index].productId);
               if (products[index2].id === mappings[index].productId){
                 obj.productTitle = (products[index2].productName) ?? '';
                 obj.productId = (products[index2].id) ?? '';
-                console.log(products);
-                console.log(index2);
-                console.log(obj);
                 break;
               }
             }
             ret.push(obj);
           }
-          console.log(ret);
           return ret;
         }));
         

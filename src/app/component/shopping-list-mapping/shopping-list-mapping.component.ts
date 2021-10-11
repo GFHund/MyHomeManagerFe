@@ -11,6 +11,7 @@ import { ShoppingListNgService } from 'src/app/service/shoppingListNg/shopping-l
 export class ShoppingListMappingComponent implements OnInit {
 
   @Input() mapping: ShoppingListProductNg = {amount:0,productTitle:'',unit:'',productId:'',id:'',shoppingListId:'',active:true};
+  onLoad = false;
 
   constructor(public productService:ProductNgService,
     public shoppingListService:ShoppingListNgService) { }
@@ -20,18 +21,25 @@ export class ShoppingListMappingComponent implements OnInit {
 
   onSave(values:any){
     console.log('onSave');
+    console.log(values);
+
     const bIsNew = this.isNew()
     this.mapping.amount = values.amount;
     this.mapping.unit = values.unit;
     this.mapping.productId = values.product;
+    this.onLoad = true;
     if(bIsNew){
       console.log('isNew');
       this.shoppingListService.addShoppingListMapping(this.mapping).subscribe((newMapping:ShoppingListProductNg) => {
         this.mapping = newMapping;
+        this.onLoad = false;
       })
     } else {
       console.log('notNew');
-      this.shoppingListService.updateShoppingListMapping(this.mapping).subscribe(() => {});
+      this.shoppingListService.updateShoppingListMapping(this.mapping).subscribe(() => {
+        this.onLoad = false;
+      });
+      
     }
   }
   isNew(){

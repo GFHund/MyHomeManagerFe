@@ -1,7 +1,7 @@
 <layout-frame returnPath="/product/list">
 	<form (ngSubmit)="onSave(form)" #form="ngForm">
 		<app-form-input label="Title" [(ngModel)]="product.productName" name="title" required></app-form-input>
-		<app-form-submit>Speichern</app-form-submit>
-		<app-action-button (onClickEvent)="this.onSaveAndNew()">Speichern und Neu</app-action-button>
+		<app-form-submit [disabled]="onLoad">Speichern</app-form-submit>
+		<app-action-button (onClickEvent)="this.onSaveAndNew()" [disabled]="onLoad">Speichern und Neu</app-action-button>
 	</form>
 </layout-frame>

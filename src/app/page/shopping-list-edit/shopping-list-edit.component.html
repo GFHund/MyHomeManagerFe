@@ -2,11 +2,22 @@
 
     <form (ngSubmit)="onSave(form.value)" #form="ngForm">
         <app-form-input label="Title" [(ngModel)]="obj.title" name="title"></app-form-input>
-        <app-form-submit>Speichern</app-form-submit>
+        <app-form-submit [disabled]="onLoad">Speichern</app-form-submit>
     </form>
     <app-action-button *ngIf="!isNew" (onClickEvent)="onAddProduct($event)">Produkt Hinzufügen</app-action-button>
+    <app-slider-container *ngIf="!onLoad" [table]="true">
+        <app-tab-table>
+            <app-tab-table-item *ngFor="let mapping of mappings;index as i" [label]="mapping.productTitle" [index]="i"></app-tab-table-item>
+        </app-tab-table>
+        <app-slider-item *ngFor="let mapping of mappings" [label]="mapping.productTitle">
+            <app-shopping-list-mapping [mapping]="mapping"></app-shopping-list-mapping>        
+        </app-slider-item>
+
+    </app-slider-container>
+    <!--
     <app-accordeon *ngFor="let mapping of mappings" [title]="mapping.productTitle">
-        <app-shopping-list-mapping [mapping]="mapping"></app-shopping-list-mapping>        
+        <app-shopping-list-mapping [mapping]="mapping"></app-shopping-list-mapping>
     </app-accordeon>
+    -->
 
 </layout-frame>

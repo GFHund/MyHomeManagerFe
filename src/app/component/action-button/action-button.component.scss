@@ -11,4 +11,7 @@
 		text-decoration: none;
 		color:$black;
 	}
+	&:disabled{
+		background-color: $gray;
+	}
 }
