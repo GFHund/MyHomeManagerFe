@@ -13,10 +13,19 @@ export class LocalStorageService {
 
   set(key:string,value:string){
     if(Capacitor.isNativePlatform()){
-      Storage.set({key: key, value:value}).then(() => {});
+      Storage.set({key: key, value:''+value}).then(() => {
+        Storage.keys().then((res)=>{ console.log(res)});
+      },(reason) => {
+        console.log(reason);
+      });
+      
     } else {
       if(window.localStorage){
         window.localStorage.setItem(key,value);
+        console.log('save on local Storage');
+      }
+      else{
+        console.log('Could not save setting');
       }
     }
     
@@ -24,8 +33,11 @@ export class LocalStorageService {
 
   get(key:string): Observable<string|null>{
     if(Capacitor.isNativePlatform()){
+      console.log('get LocalStorage')
+      console.log(key);
       return new Observable<string|null>((subscriber) => {
         Storage.get({key:key}).then((value) => {
+          console.log(value);
           subscriber.next(value.value??'');
         }).catch((reason) => {
           subscriber.error(reason);
@@ -35,6 +47,7 @@ export class LocalStorageService {
       if(window.localStorage){
         return new Observable<string|null>((subscriber) => {
           let value = window.localStorage.getItem(key);
+          
           if(value){
             subscriber.next(value)
           } else {
@@ -72,7 +85,7 @@ export class LocalStorageService {
       }
       let iValue = parseInt(value);
       if(isNaN(iValue)){
-        throw new Error('value is not a number');
+        throw new Error('value is not a number Request Key: '+key);
       }else {
         return iValue;
       }
