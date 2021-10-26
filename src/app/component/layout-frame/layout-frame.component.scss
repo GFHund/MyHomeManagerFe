@@ -8,6 +8,9 @@ header{
 	height:$headerHeight;
 	background-color:$blue-bg;
 	padding:0 5px;
+	position:fixed;
+	top:0;
+	z-index:500;
 }
 .right-side{
 	float:right;
@@ -16,6 +19,7 @@ header{
 }
 .content-container{
 	position:relative;
+	margin-top:$headerHeight;
 }
 nav{
 	position:absolute;
