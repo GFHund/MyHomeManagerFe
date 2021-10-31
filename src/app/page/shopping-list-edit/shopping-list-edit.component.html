@@ -10,7 +10,7 @@
             <app-tab-table-item *ngFor="let mapping of mappings;index as i" [label]="mapping.productTitle" [index]="i"></app-tab-table-item>
         </app-tab-table>
         <app-slider-item *ngFor="let mapping of mappings" [label]="mapping.productTitle">
-            <app-shopping-list-mapping [mapping]="mapping"></app-shopping-list-mapping>        
+            <app-shopping-list-mapping [mapping]="mapping" (saveEvent)="onSaveMapping($event)"></app-shopping-list-mapping>        
         </app-slider-item>
 
     </app-slider-container>
