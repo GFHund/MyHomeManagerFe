@@ -79,7 +79,7 @@ export class ShoppingListEditComponent implements OnInit {
 	  }
   }
 
-  onSaveMapping(mapping: ShoppingListProductNg){
+  onSaveMapping(mapping: ShoppingListProductNg,index:number){
 	  //this.slider?.update();
 	  console.log('onSaveMapping');
 	  console.log(mapping);
@@ -87,7 +87,7 @@ export class ShoppingListEditComponent implements OnInit {
 		//mapping.productTitle = product.productName;
 
 		const lastIndex = this.mappings.length - 1;
-		this.mappings[lastIndex].productTitle = product.productName;
+		this.mappings[index].productTitle = product.productName;
 	  })
 	  this.slider?.update();
   }
