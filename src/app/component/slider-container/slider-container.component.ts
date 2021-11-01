@@ -21,37 +21,25 @@ export class SliderContainerComponent implements OnInit, AfterContentInit,AfterV
   }
 
   ngAfterContentInit(){
-    console.log(this.sliderItems);
-    //this.setSlideActive();
   }
   ngAfterViewInit(){
     this.setSlideActive();
-    for(const tabItems of this.tabItems){
-      tabItems.onclick.subscribe((index) => {
-        console.log('tabItemInSliderContainerCLick');
-        this.selectedItem = index;
-        this.setSlideActive();
-      });
-    }
+    this.addOnClickOnTabItems();
   }
   ngOnChanges(){
-    console.log('onChange');
+    
   }
 
   setSlideActive(){
     let i = 0;
     for(const slider of this.sliderItems){
-      console.log(slider);
       if(i == this.selectedItem){
-        //slider.show = true;
         slider.setShow(true);
       } else {
-        //slider.show = false;
         slider.setShow(false);
       }
       i++;
     }
-    //this.cd.detectChanges();
   }
 
   slideLeft(){
@@ -74,5 +62,22 @@ export class SliderContainerComponent implements OnInit, AfterContentInit,AfterV
   selectActiveSlide(slideNum:number){
     this.selectedItem = slideNum;
     this.setSlideActive();
+  }
+  addOnClickOnTabItems(){
+    for(const tabItems of this.tabItems){
+      let observersLength = tabItems.onclick.observers.length;
+      if(observersLength <= 0){
+        tabItems.onclick.subscribe((index) => {
+          console.log('tabItemInSliderContainerCLick');
+          this.selectedItem = index;
+          this.setSlideActive();
+        });
+      }
+      
+      
+    }
+  }
+  update(){
+    this.addOnClickOnTabItems();
   }
 }

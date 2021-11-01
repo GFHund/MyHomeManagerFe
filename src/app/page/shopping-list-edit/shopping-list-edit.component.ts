@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ShoppingListNgService } from 'src/app/service/shoppingListNg/shopping-list-ng.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ShoppingListGet, ShoppingListMappingGet } from 'src/OpenApi';
+import { ProductService, ShoppingListGet, ShoppingListMappingGet } from 'src/OpenApi';
 import { ShoppingListProductNg } from 'src/app/model/ShoppingListProductNg';
 import { ShoppingListNg } from 'src/app/model/ShoppingListNg';
+import { SliderContainerComponent } from 'src/app/component/slider-container/slider-container.component';
+import { ProductNgService } from 'src/app/service/productNg/product-ng.service';
+import { ProductNg } from 'src/app/model/ProductNg';
 
 @Component({
   selector: 'app-shopping-list-edit-component',
@@ -17,8 +20,10 @@ export class ShoppingListEditComponent implements OnInit {
 	mappings: ShoppingListProductNg[] = [];
 	isNew: boolean = false;
 	onLoad = true;
+	@ViewChild(SliderContainerComponent) slider?:SliderContainerComponent;
 
   	constructor(public shoppingListService: ShoppingListNgService,
+		public productService: ProductNgService,
 		public route: ActivatedRoute,
 		public router: Router) { }
 
@@ -52,6 +57,11 @@ export class ShoppingListEditComponent implements OnInit {
 		  id:'',
 		  active:true,
 		  shoppingListId:this.obj.id});
+		
+	setTimeout(()=>{
+		this.slider?.selectActiveSlide(this.mappings.length-1);
+	},1000);
+	
   }
   onSave(values:any){
 	  console.log(values);
@@ -67,5 +77,18 @@ export class ShoppingListEditComponent implements OnInit {
 			this.onLoad = false;
 		});
 	  }
+  }
+
+  onSaveMapping(mapping: ShoppingListProductNg,index:number){
+	  //this.slider?.update();
+	  console.log('onSaveMapping');
+	  console.log(mapping);
+	  this.productService.getProduct(mapping.productId).subscribe((product:ProductNg) => {
+		//mapping.productTitle = product.productName;
+
+		const lastIndex = this.mappings.length - 1;
+		this.mappings[index].productTitle = product.productName;
+	  })
+	  this.slider?.update();
   }
 }
