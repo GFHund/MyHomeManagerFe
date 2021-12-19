@@ -8,6 +8,10 @@ header{
 	height:$headerHeight;
 	background-color:$blue-bg;
 	padding:0 5px;
+	position:fixed;
+	top:0;
+	left:0;
+	z-index:1000;
 }
 .right-side{
 	float:right;
@@ -18,9 +22,10 @@ header{
 	position:relative;
 }
 nav{
-	position:absolute;
+	//position:absolute;
+	position:fixed;
 	left:-100%;
-	top:0;
+	top:4rem;
 	background-color:$blue-bg;
 	height:calc(100vh - #{$headerHeight});
 	width:100%;
@@ -53,7 +58,8 @@ nav.nav-open{
 	left:0;
 }
 main{
-	padding:1rem 1rem 0 1rem;
+	//padding:1rem 1rem 0 1rem;
+	padding: 5rem 1rem 0 1rem;
 }
 .line-through{
 	text-decoration: line-through;

@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { FormSelectInterface, SelectOptions } from 'src/app/interfaces/formSelectInterface';
 
 @Component({
@@ -28,6 +30,7 @@ export class FormEntitySelectComponent implements OnInit, ControlValueAccessor {
 
   searchText='';
   openSelect = false;
+  debounceObservable = new Subject<string>();
 
   constructor() { }
 
@@ -35,6 +38,12 @@ export class FormEntitySelectComponent implements OnInit, ControlValueAccessor {
     if(this.value.length > 0){
       this.labelClass = 'not-empty';
     }
+    this.debounceObservable.pipe(debounceTime(400),distinctUntilChanged()).subscribe((inputValue:string) => {
+      this.entityService?.getSelectOptions(inputValue).subscribe((options:SelectOptions[])=>{
+        //console.log(options);
+        this.options = options;
+      });
+    });
   }
 
   onKeyup(evt: Event){
@@ -46,11 +55,9 @@ export class FormEntitySelectComponent implements OnInit, ControlValueAccessor {
       this.labelClass = 'not-empty';
     }
     
+    this.debounceObservable.next(value);
     
-    this.entityService?.getSelectOptions(value).subscribe((options:SelectOptions[])=>{
-      //console.log(options);
-      this.options = options;
-    });
+    
   }
 
   public registerOnChange(fn: any) {
