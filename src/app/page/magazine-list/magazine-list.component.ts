@@ -21,4 +21,8 @@ export class MagazineListComponent implements OnInit {
     });
   }
 
+  onMagazineIndex(){
+    console.log('drin');
+  }
+
 }
