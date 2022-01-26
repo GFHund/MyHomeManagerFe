@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { mergeMap } from 'rxjs/operators';
 import { MagazinesNg } from 'src/app/model/MagazinesNg';
 import { MagazinesNgService } from 'src/app/service/magazinesNg/magazines-ng.service';
 
@@ -22,7 +23,13 @@ export class MagazineListComponent implements OnInit {
   }
 
   onMagazineIndex(){
-    console.log('drin');
+    this.bLoading = true;
+    this.magazineService.indexMagazines().pipe(mergeMap(ret => {
+      return this.magazineService.getMagazines();
+    })).subscribe((magazines) => {
+      this.magazines = magazines;
+      this.bLoading = false;
+    })
   }
 
 }

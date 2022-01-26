@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { map, mergeMap, tap } from 'rxjs/operators';
 import { AppModes } from 'src/app/model/AppSettings';
 import { MagazinesNg } from 'src/app/model/MagazinesNg';
-import { MagazinesGet, MagazinesService } from 'src/OpenApi';
+import { MagazinesGet, MagazinesIndexRet, MagazinesService } from 'src/OpenApi';
 import { AppSettingsService } from '../appSettings/app-settings.service';
 import { LocalStorageService } from '../localStorage/local-storage.service';
 import { environment } from 'src/environments/environment';
@@ -69,5 +69,17 @@ export class MagazinesNgService {
       }
     }));
     
+  }
+
+  indexMagazines(){
+    return this.appSetting.getMode().pipe(mergeMap((mode) => {
+      if(mode == AppModes.LIVE){
+        return this.magazinesService.indexMagazineData({limit:20,offset:0});
+      } else {
+        return new Observable<MagazinesIndexRet>(subscribe => {
+          subscribe.next({read:20});
+        });
+      }
+    }));
   }
 }
