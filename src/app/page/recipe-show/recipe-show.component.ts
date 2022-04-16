@@ -13,7 +13,8 @@ export class RecipeShowComponent implements OnInit {
   id = '';
   recipe?: RecipeNg;
 
-  constructor(public recipeService:RecipeNgService,public route: ActivatedRoute) { }
+  constructor(public recipeService: RecipeNgService, public route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {

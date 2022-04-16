@@ -18,29 +18,29 @@ import { FormSelectInterface, SelectOptions } from 'src/app/interfaces/formSelec
 })
 export class FormEntitySelectComponent implements OnInit, ControlValueAccessor {
 
-  @Input() entityService?:FormSelectInterface;
+  @Input() entityService?: FormSelectInterface;
   @Input() label = '';
   labelClass = '';
   public propagateChange = Function.prototype;
 	public propagateTouched = Function.prototype;
   shownValue = '';
   value = '';
-  selectedValue: SelectOptions = {id:'',text:''};
-  options:SelectOptions[] = [];
+  selectedValue: SelectOptions = {id: '', text: ''};
+  options: SelectOptions[] = [];
 
-  searchText='';
+  searchText = '';
   openSelect = false;
   debounceObservable = new Subject<string>();
 
   constructor() { }
 
   ngOnInit(): void {
-    if(this.value.length > 0){
+    if (this.value.length > 0){
       this.labelClass = 'not-empty';
     }
     this.debounceObservable.pipe(debounceTime(400),distinctUntilChanged()).subscribe((inputValue:string) => {
       this.entityService?.getSelectOptions(inputValue).subscribe((options:SelectOptions[])=>{
-        //console.log(options);
+        // console.log(options);
         this.options = options;
       });
     });
@@ -50,14 +50,14 @@ export class FormEntitySelectComponent implements OnInit, ControlValueAccessor {
     console.log(evt);
     //this.value = (evt.target as HTMLInputElement).value;
     let value = (evt.target as HTMLInputElement).value;
-    
+
     if(this.value.length > 0){
       this.labelClass = 'not-empty';
     }
-    
+
     this.debounceObservable.next(value);
-    
-    
+
+
   }
 
   public registerOnChange(fn: any) {
@@ -76,11 +76,11 @@ export class FormEntitySelectComponent implements OnInit, ControlValueAccessor {
         this.labelClass = 'not-empty';
       });
     }
-    
+
   }
 
   onClickOption(value: SelectOptions){
-    
+
     this.value = value.text;
     this.shownValue = value.text;
     console.log(value);

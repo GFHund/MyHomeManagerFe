@@ -1,51 +1,20 @@
-import { MagazineEditComponent } from './page/magazine-edit/magazine-edit.component';
-import { RecipeEditComponent } from './page/recipe-edit/recipe-edit.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { IndexComponent } from './page/index/index.component';
-import { LoginComponent } from './page/login/login.component';
-import { RecipeListComponent } from './page/recipe-list/recipe-list.component';
-import { RecipeShowComponent } from './page/recipe-show/recipe-show.component';
-import { ShoppingListEditComponent } from './page/shopping-list-edit/shopping-list-edit.component';
-import { ShoppingListViewComponent } from './page/shopping-list-view/shopping-list-view.component';
-import { ShoppingListComponent } from './page/shopping-list/shopping-list.component';
-import { ProductListComponent } from './page/product-list/product-list.component';
-import { ProductEditComponent } from './page/product-edit/product-edit.component';
-import { ToDoListOverviewComponent } from './page/to-do-list-overview/to-do-list-overview.component';
-import { ToDoListViewComponent } from './page/to-do-list-view/to-do-list-view.component';
-import { WikiListComponent } from './page/wiki-list/wiki-list.component';
-import { UserManagmentListComponent } from './page/user-managment-list/user-managment-list.component';
-import { SettingComponent } from './page/setting/setting.component';
-import { MagazineListComponent } from './page/magazine-list/magazine-list.component';
-import { WikiEditComponent } from './page/wiki-edit/wiki-edit.component';
-import { WikiShowComponent } from './page/wiki-show/wiki-show.component';
-import { AppSettingComponent } from './page/app-setting/app-setting.component';
+
 
 const routes: Routes = [
 {path: '', component: IndexComponent},
-{path: 'login', component: LoginComponent},
-{path: 'shopping-list', component: ShoppingListComponent},
-{path: 'shopping-list/:id/view', component: ShoppingListViewComponent},
-{path: 'shopping-list/:id/edit', component: ShoppingListEditComponent},
-{path: 'shopping-list/new', component: ShoppingListEditComponent},
-{path: 'recipe', component: RecipeListComponent},
-{path: 'recipe/:id/view', component: RecipeShowComponent},
-{path: 'recipe/:id/edit',component: RecipeEditComponent},
-{path: 'recipe/new',component: RecipeEditComponent},
-{path: 'product/list',component: ProductListComponent},
-{path: 'product/:id/edit', component: ProductEditComponent},
-{path: 'product/new', component: ProductEditComponent},
-{path: 'todo/list', component: ToDoListOverviewComponent},
-{path: 'todo/:id/view',component: ToDoListViewComponent},
-{path: 'wiki/list',component: WikiListComponent},
-{path: 'wiki/new',component: WikiEditComponent},
-{path: 'wiki/:id/edit',component: WikiEditComponent},
-{path: 'wiki/:id/view',component: WikiShowComponent},
-{path: 'magazine',component: MagazineListComponent},
-{path: 'magazine/:id/edit', component:MagazineEditComponent},
-{path: 'user-managment/list', component: UserManagmentListComponent},
-{path: 'app-settings',component:AppSettingComponent},
-{path: 'settings',component: SettingComponent}
+{path: 'login', loadChildren: () => import('src/app/page/login/login.module').then(m => m.LoginModule)},
+{path: 'shopping-list', loadChildren: () => import('src/app/module/shopping-list.module').then(m => m.ShoppingListModule)},
+{path: 'recipe', loadChildren: () => import('src/app/module/recipe.module').then(m => m.RecipeModule)},
+{path: 'product', loadChildren: () => import('src/app/module/product.module').then(m => m.ProductModule)},
+{path: 'todo', loadChildren: () => import('src/app/module/to-do.module').then(m => m.ToDoModule)},
+{path: 'wiki', loadChildren: () => import('src/app/module/wiki.module').then(m => m.WikiModule)},
+{path: 'magazine', loadChildren: () => import('src/app/module/magazine.module').then(m => m.MagazineModule)},
+{path: 'user-managment', loadChildren: () => import('src/app/module/user-managment.module').then(m => m.UserManagmentModule)},
+{path: 'app-settings', loadChildren: () => import('src/app/module/app-settings.module').then(m => m.AppSettingsModule)},
+{path: 'settings', loadChildren: () => import('src/app/module/settings.module').then(m => m.SettingsModule)}
 ];
 
 @NgModule({

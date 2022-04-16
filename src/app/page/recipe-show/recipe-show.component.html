@@ -1,6 +1,6 @@
 <layout-frame returnPath="/recipe">
     <ng-template [ngIf]="recipe">
-        <h1>{{recipe.title}}</h1>
+        <h1>{{recipe?.title}}</h1>
         <h2>Zutaten</h2>
         <div class="incredient-container">
             <ul class="incredient-list" >
@@ -23,6 +23,6 @@
             </div>
         </div>
     </ng-template>
-    
+
 
 </layout-frame>
