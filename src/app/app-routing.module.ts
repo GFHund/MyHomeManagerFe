@@ -14,7 +14,8 @@ const routes: Routes = [
 {path: 'magazine', loadChildren: () => import('src/app/module/magazine.module').then(m => m.MagazineModule)},
 {path: 'user-managment', loadChildren: () => import('src/app/module/user-managment.module').then(m => m.UserManagmentModule)},
 {path: 'app-settings', loadChildren: () => import('src/app/module/app-settings.module').then(m => m.AppSettingsModule)},
-{path: 'settings', loadChildren: () => import('src/app/module/settings.module').then(m => m.SettingsModule)}
+{path: 'settings', loadChildren: () => import('src/app/module/settings.module').then(m => m.SettingsModule)},
+{path: 'traffic', loadChildren: () => import('src/app/module/traffic.module').then(m => m.TrafficModule)},
 ];
 
 @NgModule({

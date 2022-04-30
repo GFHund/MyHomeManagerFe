@@ -56,8 +56,6 @@ export class FormEntitySelectComponent implements OnInit, ControlValueAccessor {
     }
 
     this.debounceObservable.next(value);
-
-
   }
 
   public registerOnChange(fn: any) {

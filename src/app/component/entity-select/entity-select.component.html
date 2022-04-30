@@ -1,0 +1,15 @@
+<label [class]="labelClass">
+	<input type="text" [value]="shownValue" disabled="disabled" />
+	<button type="button" class="btn" (click)="toggleSelectMenu()">
+		<app-icon icon="chevron-down"></app-icon>
+	</button>
+	<span>{{label}}:</span>
+	
+</label>
+<div class="options-container" [class.is--open]="openSelect">
+	<input type="text" [value]="searchText" (keyup)="onKeyup($event)" placeholder="Suchtext" />
+	<div class="options-selection">
+		<div *ngFor="let option of options" class="options" (click)="onClickOption(option)">{{option.text}}</div>
+	</div>
+	
+</div>

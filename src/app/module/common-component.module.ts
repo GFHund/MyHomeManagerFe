@@ -15,6 +15,7 @@ import { LoadingSpinnerComponent } from './../component/loading-spinner/loading-
 import { LayoutFrameComponent } from './../component/layout-frame/layout-frame.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { EntitySelectComponent } from '../component/entity-select/entity-select.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule],
@@ -33,6 +34,7 @@ import { CommonModule } from '@angular/common';
     SearchInputComponent,
     TabTableComponent,
     TabTableItemComponent,
+    EntitySelectComponent,
   ],
   exports: [
     LayoutFrameComponent,
@@ -49,6 +51,7 @@ import { CommonModule } from '@angular/common';
     SearchInputComponent,
     TabTableComponent,
     TabTableItemComponent,
+    EntitySelectComponent,
   ]
 })
 export class CommonComponentModule{}

@@ -1,0 +1,61 @@
+@import "../../../variables.scss";
+label{
+	position:relative;
+	display:block;
+	span{
+		position:absolute;
+		top:50%;
+		left:1rem;
+		transform: translateY(-50%);
+		transition: all 0.2s ease;
+	}
+	input{
+		padding:1.2rem 1rem 0.5rem;
+		width:100%;
+	}
+	input:focus + span,&.not-empty span{
+		font-size:1.2rem;
+		top:0;
+		transform:none;
+	}
+	.btn{
+		position:absolute;
+		right:0;
+
+	}
+}
+:host{
+    position:relative;
+    display:block;
+}
+.options{
+	padding:10px 15px;
+	line-height:1.25;
+	&:hover{
+		background-color:$blue-bg;
+		color: $white;
+	}
+	
+}
+.options-container{
+	border:1px solid $gray;
+    position:absolute;
+	//position:relative;
+    top:100%;
+    left:0;
+    width:100%;
+	display:none;
+	padding:15px;
+	background-color: $gray;
+	z-index:5000;
+	&.is--open{
+		display:block;
+	}
+	input{
+		width:100%;
+	}
+}
+.options-selection{
+	max-height:(1.25*16+2*10)*5px;
+	overflow-y: scroll;
+}

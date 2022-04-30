@@ -1,0 +1,16 @@
+<layout-frame>
+    <app-entity-select label="Autobahnen" [entityService]="trafficService" (valueChanged)="onAutobahnSelected($event)"></app-entity-select>
+    <h1>Sperrungen</h1>
+    <div class="closures-wrapper">
+        <div *ngFor="let closure of closures?.closure">
+            {{closure.description}}
+        </div>
+    </div>
+    <h1>Warnungen</h1>
+    <div class="warning-wrapper">
+        <div *ngFor="let warning of warnings?.warning">
+            {{warning.description}}
+        </div>
+    </div>
+
+</layout-frame>
