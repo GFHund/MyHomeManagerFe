@@ -6,15 +6,26 @@
     <app-form-submit>Speichern</app-form-submit>
   </form>
   <hr />
-  
-  <app-accordeon *ngFor="let incredient of recipe.incredient" [title]="incredient.productTitle">
-  	<app-recipe-incredient-edit [incredient]="incredient" [recipeId]="recipe.id"></app-recipe-incredient-edit>
-  </app-accordeon>
+  <app-slider-container *ngIf="!onLoad" [table]="true">
+    <app-tab-table>
+      <app-tab-table-item *ngFor="let incredient of recipe.incredient;index as i" [label]="incredient.productTitle" [index]="i"></app-tab-table-item>
+    </app-tab-table>
+    <app-slider-item *ngFor="let incredient of recipe.incredient;index as i" [label]="incredient.productTitle">
+      <app-recipe-incredient-edit [incredient]="incredient" [recipeId]="recipe.id"></app-recipe-incredient-edit>
+    </app-slider-item>
+  </app-slider-container>
+
   <app-action-button *ngIf="!isNew" (onClickEvent)="addProduct($event)">Zutat hinzufügen</app-action-button>
   <hr />
+
+  <app-slider-container *ngIf="!onLoad" [table]="true">
+    <app-tab-table>
+      <app-tab-table-item *ngFor="let step of recipe.steps;index as i" [label]="''+step.stepnumber" [index]="i"></app-tab-table-item>
+    </app-tab-table>
+    <app-slider-item *ngFor="let step of recipe.steps;index as i" [label]="''+step.stepnumber">
+      <app-recipe-step-edit [step]="step" [recipeId]="recipe.id"></app-recipe-step-edit>
+    </app-slider-item>
+  </app-slider-container>
   
-  <app-accordeon *ngFor="let step of recipe.steps" [title]="''+step.stepnumber">
-    <app-recipe-step-edit [step]="step" [recipeId]="recipe.id"></app-recipe-step-edit>
-  </app-accordeon>
   <app-action-button *ngIf="!isNew" (onClickEvent)="addStep($event)">Schritt hinzufügen</app-action-button>
 </layout-frame>

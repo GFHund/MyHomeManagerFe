@@ -45,17 +45,27 @@ export class SliderContainerComponent implements OnInit, AfterContentInit,AfterV
   slideLeft(){
     console.log('slideLeft');
     this.selectedItem--;
+    /*
     if(this.selectedItem >= this.sliderItems.length){
       this.selectedItem = 0;
     }
+    */
+   if(this.selectedItem < 0){
+     this.selectedItem = 0;
+   }
     this.setSlideActive();
   }
   slideRight(){
     console.log('slideRight');
     this.selectedItem++;
+    /*
     if(this.selectedItem < 0){
       this.selectedItem = this.sliderItems.length - 1;
     }
+    */
+   if(this.selectedItem >= this.sliderItems.length){
+    this.selectedItem = this.sliderItems.length - 1;
+   }
     this.setSlideActive();
   }
 

@@ -22,6 +22,7 @@ export class RecipeEditComponent implements OnInit {
   //steps: RecipeStepGet[] = [];
   //incredients: RecipeIncredientGet[] = [];
   isNew: boolean = false;
+  onLoad = true;
 
   constructor(private productService:ProductNgService, 
     private recipeService: RecipeNgService, 
@@ -35,9 +36,11 @@ export class RecipeEditComponent implements OnInit {
         this.recipeService.getRecipe(params.id).subscribe(recipe => {
           console.log(recipe);
           this.recipe = recipe;
+          this.onLoad = false;
         });
       } else {
         this.isNew = true;
+        this.onLoad = false;
       }
     });
   }
@@ -76,7 +79,7 @@ export class RecipeEditComponent implements OnInit {
     this.recipe.incredient.push({
       id:'',
       productId:'',
-      amount:-1,
+      amount:1,
       productTitle:'',
       unit:'',recipeId:''});
   }

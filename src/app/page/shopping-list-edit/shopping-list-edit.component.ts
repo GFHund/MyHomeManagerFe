@@ -50,7 +50,7 @@ export class ShoppingListEditComponent implements OnInit {
   onAddProduct(value:any){
 	  console.log('Product Added');
 	  this.mappings.push({
-		  amount:0,
+		  amount:1,
 		  productTitle:'bla',
 		  unit:'',
 		  productId:'',
