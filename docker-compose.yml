@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+ my_home_manager_fe_apache:
+  container_name: my_home_manager_fe_apache
+  image: httpd:2.4.49-buster
+  ports: 
+   - 80:80
+  volumes: 
+   - .:/usr/local/apache2/htdocs
+   - ./apacheConfig/apacheConf.conf:/usr/local/apache2/conf/httpd.conf:ro
