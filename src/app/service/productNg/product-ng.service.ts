@@ -34,12 +34,12 @@ export class ProductNgService implements FormSelectInterface {
                 if(!ids.hasOwnProperty(i)){
                   continue;
                 }
-    
+
                 for(const k in list){
                   if(!list.hasOwnProperty(k)){
                     continue;
                   }
-    
+
                   if(ids[i] === list[k].id){
                     ret.push(list[k]);
                   }
@@ -61,7 +61,7 @@ export class ProductNgService implements FormSelectInterface {
               let ret:ProductGet[] = oObj.obj as ProductGet[];
               subscriber.next(ret);
             }
-            
+
           },(error) => {
             subscriber.error('offline Data not found');
           });
@@ -119,7 +119,7 @@ export class ProductNgService implements FormSelectInterface {
               let ret:ProductGet = oObj.obj as ProductGet;
               subscriber.next(ret);
             }
-            
+
           },(error) => {
             subscriber.error('offline Data not found');
           });
@@ -136,7 +136,7 @@ export class ProductNgService implements FormSelectInterface {
       }));
       return observable2;
     }));
-    
+
   }
 	createProduct(product:ProductNg):Observable<ProductNg>{
     return this.appSetting.getMode().pipe(mergeMap((mode) => {
@@ -159,18 +159,27 @@ export class ProductNgService implements FormSelectInterface {
       }
     }));
     if(true){
-      
+
     }
     else {
-      
+
     }
 	}
-	updateProduct(product:ProductNg){
-		return new Observable<void>(subscriber => {
-			setTimeout(() => {
-				subscriber.next();
-			},1000);
-		});
+	updateProduct(product:ProductNg):Observable<ProductNg>{
+    return this.appSetting.getMode().pipe(mergeMap((mode) => {
+      if(mode == AppModes.LIVE){
+        let productWrite: ProductWrite = {productName:product.productName};
+        return this.productService.updateProduct(product.id,productWrite).pipe(map((product:ProductGet)=>{
+          return this.convert(product);
+        }));
+      }
+      return new Observable<ProductNg>(subscriber => {
+        setTimeout(() => {
+          subscriber.next(product);
+        },1000);
+      });
+    }));
+
 	}
   deleteProduct(productId:string){
     return this.productService.deleteProduct(productId);
@@ -191,7 +200,7 @@ export class ProductNgService implements FormSelectInterface {
       } else {
         observable = this.productService.getProducts();
       }
-      
+
     } else {
       observable = new Observable<ProductGet[]>(subscriber => {
         setTimeout(()=>{

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Capacitor} from '@capacitor/core';
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/preferences';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -13,12 +13,12 @@ export class LocalStorageService {
 
   set(key:string,value:string){
     if(Capacitor.isNativePlatform()){
-      Storage.set({key: key, value:''+value}).then(() => {
-        Storage.keys().then((res)=>{ console.log(res)});
+      Preferences.set({key: key, value:''+value}).then(() => {
+        Preferences.keys().then((res)=>{ console.log(res)});
       },(reason) => {
         console.log(reason);
       });
-      
+
     } else {
       if(window.localStorage){
         window.localStorage.setItem(key,value);
@@ -28,7 +28,7 @@ export class LocalStorageService {
         console.log('Could not save setting');
       }
     }
-    
+
   }
 
   get(key:string): Observable<string|null>{
@@ -36,7 +36,7 @@ export class LocalStorageService {
       console.log('get LocalStorage')
       console.log(key);
       return new Observable<string|null>((subscriber) => {
-        Storage.get({key:key}).then((value) => {
+        Preferences.get({key:key}).then((value) => {
           console.log(value);
           subscriber.next(value.value??'');
         }).catch((reason) => {
@@ -47,19 +47,19 @@ export class LocalStorageService {
       if(window.localStorage){
         return new Observable<string|null>((subscriber) => {
           let value = window.localStorage.getItem(key);
-          
+
           if(value){
             subscriber.next(value)
           } else {
             //subscriber.error('key Not Found');
             subscriber.next(null);
           }
-          
+
         })
-        
+
       } else {
         return new Observable<string>((subscriber) => {
-          Storage.get({key:key}).then((value) => {
+          Preferences.get({key:key}).then((value) => {
             subscriber.next(value.value??'');
           }).catch((reason) => {
             subscriber.error(reason);

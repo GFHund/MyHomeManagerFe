@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AppSettings } from 'src/app/model/AppSettings';
+import { AppModes, AppSettings } from 'src/app/model/AppSettings';
 import { AppSettingsService } from 'src/app/service/appSettings/app-settings.service';
 import { LocalStorageService } from 'src/app/service/localStorage/local-storage.service';
 import { ToastService } from 'src/app/service/toast/toast.service';
@@ -13,7 +13,7 @@ import { ToastService } from 'src/app/service/toast/toast.service';
 export class AppSettingComponent implements OnInit {
 
   appSettings: AppSettings = {
-    mode:-1
+    mode:AppModes.LIVE
   };
 
   constructor(private localStorage:LocalStorageService,private toastService:ToastService,private appSettingsService:AppSettingsService) { }
@@ -21,11 +21,11 @@ export class AppSettingComponent implements OnInit {
   ngOnInit(): void {
     this.appSettingsService.getMode().subscribe((value) => {
       if(value === null){
-        this.appSettings.mode = -1;
+        this.appSettings.mode = AppModes.LIVE;
       } else {
         this.appSettings.mode = value;
       }
-      
+
     })
   }
 

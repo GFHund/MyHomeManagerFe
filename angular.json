@@ -23,10 +23,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/myHomeManagerFe",
+            "outputPath": "dist/myHomeManagerFe/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
@@ -85,28 +85,29 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "myHomeManagerFe:build"
+            "buildTarget": "myHomeManagerFe:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "myHomeManagerFe:build:production"
+              "buildTarget": "myHomeManagerFe:build:production"
             },
             "dev":{
-              "browserTarget": "myHomeManagerFe:build:dev"
+              "buildTarget": "myHomeManagerFe:build:dev"
+
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "myHomeManagerFe:build"
+            "buildTarget": "myHomeManagerFe:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
@@ -130,6 +131,77 @@
               "devServerTarget": "myHomeManagerFe:serve:production"
             }
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/myHomeManagerFe/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "./src",
+                "./node_modules/simplemde/dist"
+              ]
+            }
+          },
+          "configurations": {
+            "production": {
+              "buildOptimizer": true,
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "sourceMap": false,
+              "extractLicenses": true,
+              "vendorChunk": false
+            },
+            "dev": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "myHomeManagerFe:build:development",
+              "serverTarget": "myHomeManagerFe:server:development"
+            },
+            "production": {
+              "browserTarget": "myHomeManagerFe:build:production",
+              "serverTarget": "myHomeManagerFe:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@angular-devkit/build-angular:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "myHomeManagerFe:build:production",
+              "serverTarget": "myHomeManagerFe:server:production"
+            },
+            "development": {
+              "browserTarget": "myHomeManagerFe:build:development",
+              "serverTarget": "myHomeManagerFe:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

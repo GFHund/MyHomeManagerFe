@@ -16,7 +16,12 @@ export class ProductListComponent implements OnInit {
   constructor(private productService:ProductNgService) { }
 
   ngOnInit(): void {
-		this.productService.getList().subscribe((articles:ProductNg[]) => {
+		this.loadList();
+  }
+
+  loadList(){
+    this.bLoading = true;
+    this.productService.getList().subscribe((articles:ProductNg[]) => {
       this.bLoading = false;
 			this.products = articles;
 		});
@@ -24,11 +29,15 @@ export class ProductListComponent implements OnInit {
 
   onChange(search:string){
     this.sSearch = search;
-    
+
   }
   onDeleteProduct(id: string ){
+    let index = this.products.findIndex((value,index,product) => {
+      return value.id == id;
+    });
+    this.products.splice(index,1);
     this.productService.deleteProduct(id).subscribe(() => {
-      
+      this.loadList();
     })
   }
 }

@@ -1,6 +1,6 @@
 import { MhmFormsModule } from './module/mhm-forms.module';
 import { CommonComponentModule } from './module/common-component.module';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -31,7 +31,8 @@ import { ErrorInterceptorService } from './core/interceptor/error-interceptor.se
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService,multi:true},
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService,multi:true}
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService,multi:true},
+    provideClientHydration()
   ],
   bootstrap: [AppComponent]
 })
